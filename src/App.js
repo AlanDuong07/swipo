@@ -1,19 +1,14 @@
 import './App.scss';
-import {useState} from "react";
-import MainCard from './components/MainCard.js';
-
+import { BrowserRouter as Router } from "react-router-dom";
 function App() {
-  // state variable for if logged in or not
-  const isLoggedIn = useState(false);
-  
+
   return (
-    <div className="App">
-
-        {
-            isLoggedIn && <MainCard/>
-        }
-
-    </div>
+    <Router>
+      <div className="App">
+        <Route path="/" exact component={loginButton} /> 
+        <Route path="/callback" exact component={mainPage} /> 
+      </div>
+    </Router>
   );
 }
 
