@@ -71,7 +71,7 @@ function MainPage() {
 }
 
 function getTrackInfo(playlistTracks, songCounter) {
-    console.log("starting getTrackInfo: playlist tracks", playlistTracks);
+    // console.log("starting getTrackInfo: playlist tracks", playlistTracks);
     if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
         console.log("playlistTracks is undefined or 0, ");
         return [];
