@@ -1,4 +1,5 @@
 import React from 'react'
+import SwipoLogo from "../images/SwipoLogo.svg";
 
 function TopNav(props) {
     return (
@@ -6,9 +7,10 @@ function TopNav(props) {
             <a href="#" id="profileButton">
                 
             </a>
-            <a href="#" id="swipoLogo">
-                <h1>Swipo</h1>
-            </a>
+            <img src={SwipoLogo} alt="Swipo" id="swipoLogo"></img>
+            {/* <a href="#" id="swipoLogo">
+                <img src={SwipoLogo} alt="Swipo"></img>
+            </a> */}
             <a href="#" id="tempButton">
                 
             </a>
