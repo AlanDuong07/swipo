@@ -8,15 +8,22 @@ function MainPage() {
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
-    const [playlistMade, setPlaylistMade] = useState(false)
+    const [userPlaylistID, setUserPlaylistID] = useState("")
 
     //init state for tinder card
     const [lastDirection, setLastDirection] = useState()
 
+    const playlistName = "Swipo 🔥🔥"
+
     //react-tinder functions
     const swiped = (direction, nameToDelete) => {
-        console.log('removing: ' + nameToDelete)
-        setLastDirection(direction)
+        console.log('removing: ' + nameToDelete);
+        setLastDirection(direction);
+        if (userPlaylistID !== "") {
+            if (direction === "right") {
+                // add to playlist
+            }
+        }
     }
     
     const outOfFrame = (name) => {
@@ -36,6 +43,7 @@ function MainPage() {
                 console.log('Tracks object for tinder swipe', tracks);
             }
         });
+
         spotifyApi.getMe(null, function (err, data) {
             if (err) console.error(err);
             else {
@@ -43,7 +51,31 @@ function MainPage() {
                 setUserID(data.id);
             }
         });
-    }, [userID])
+
+        if (userID !== "") {
+            spotifyApi.getUserPlaylists(userID,null, function (err, data) {
+                if (err) {
+                    console.error(err)
+                }
+                else {
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].items.name === playlistName) {
+                            setUserPlaylistID(data[i].items.id)
+                        }
+                    }
+                }
+            });
+
+            if (userPlaylistID === "") {
+                spotifyApi.createPlaylist(userID,{name: playlistName}, function (err, data) {
+                    if (err) console.error(err);
+                    else {
+                        setUserPlaylistID(data.id)
+                    }
+                });
+            }
+        }
+        }, [userID])
     if (tracks !== undefined) {
         return (
             <div id="MainPage">
@@ -52,7 +84,7 @@ function MainPage() {
                         tracks.map((track) => 
                             <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name)} 
                                 onCardLeftScreen={() => outOfFrame(track.name)}>
-                                <MainCard track={track}/>   
+                                <MainCard track={track}/>
                             </TinderCard>
                         )
                     }
