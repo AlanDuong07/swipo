@@ -10,37 +10,41 @@ function MainPage() {
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
-
+    //init state for tinder card
+    const [lastDirection, setLastDirection] = useState()
 
     //react-tinder functions
-    const onSwipe = (direction) => {
-        console.log('You swiped: ' + direction)
+    const swiped = (direction, nameToDelete) => {
+        console.log('removing: ' + nameToDelete)
+        setLastDirection(direction)
     }
-    const onCardLeftScreen = (myIdentifier) => {
-        console.log(myIdentifier + ' left the screen')
+    
+    const outOfFrame = (name) => {
+        console.log(name + ' left the screen!')
     }
+
 
     //functions ran constantly to get playlist
     useEffect(() => {
         const spotifyApi = new SpotifyWebApi();
         spotifyApi.setAccessToken(access_token);
         
-        let playlistTracks = spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
+        spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
             if (err) console.error(err);
             else {
-                console.log('Playlist Tracks', data.items);
+                // console.log('Playlist Tracks', data.items);
                 setPlaylistTracks(data.items);
+                setTracks(createAllTracks(playlistTracks));
+                console.log('Tracks object for tinder swipe', tracks);
             }
         });
-        let userID = spotifyApi.getMe(null, function (err, data) {
+        spotifyApi.getMe(null, function (err, data) {
             if (err) console.error(err);
             else {
                 console.log('User ID', data.id);
                 setUserID(data.id);
             }
         });
-
-        setTracks(createAllTracks(playlistTracks))
     }, [userID])
     return (
         <div id="MainPage">
@@ -50,8 +54,9 @@ function MainPage() {
 }
 
 function getTrackInfo(playlistTracks, songCounter) {
-    console.log("playlist tracks", playlistTracks)
-    if (playlistTracks === undefined || playlistTracks.length === 0) {
+    console.log("starting getTrackInfo: playlist tracks", playlistTracks);
+    if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
+        console.log("playlistTracks is undefined or 0, ");
         return [];
     }
 
@@ -69,10 +74,14 @@ function getTrackInfo(playlistTracks, songCounter) {
 
 function createAllTracks(playlistTracks) {
     let tracks = [];
+    if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
+        console.log("createAllTracks terminated because playLists tracks is empty");
+        return;
+    }
     for (let i = 0; i < playlistTracks.length; i++) {
         tracks.push(getTrackInfo(playlistTracks, i));
     }
-
+    console.log("Tracks", tracks);
     return tracks
 }
 
