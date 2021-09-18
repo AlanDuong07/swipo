@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 
 
 function MainCard(props) {
-
+    const [songCounter, setSongCounter] = useState(0);
     return (
         <div className="MainCard">
             The user ID is {props.userID}.
@@ -13,7 +13,12 @@ function MainCard(props) {
 }
 
 function getTrack(playlistTracks, songCounter) {
-    var name = playlistTracks[songCounter].name;
+    console.log("playlist tracks", playlistTracks)
+    if (playlistTracks === undefined || playlistTracks.length == 0) {
+        return []
+    }
+    var name = playlistTracks[songCounter].track.name;
+    return name
 }
 
 export default MainCard
