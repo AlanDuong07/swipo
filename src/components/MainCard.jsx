@@ -1,24 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+
 
 function MainCard(props) {
-    
+
     return (
         <div className="MainCard">
-            <p>
             The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            The user ID is {props.userID}.
-            </p>
+            The current song is {getTrack(props.playlistTracks, 0)}
         </div>
     )
+
+}
+
+function getTrack(playlistTracks, songCounter) {
+    var name = playlistTracks[songCounter].name;
 }
 
 export default MainCard
