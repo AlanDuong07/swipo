@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-
+//mainCard receives names, artists, albumImageUrl, musicPreviewUrl
 function MainCard(props) {
     return (
         <div className="MainCard">
