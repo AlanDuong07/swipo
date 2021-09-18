@@ -6,15 +6,17 @@ import 'react-spotify-auth/dist/index.css'
 
 import MainPage from "./components/MainPage.jsx";
 import LoginButton from "./components/LoginButton";
-
+import TopNav from './components/TopNav';
+import BottomNav from './components/BottomNav';
 function App() {
-    
+
     return (
         <Router>
             <div className="App">
-
+                <TopNav/>
                 <Route path="/" exact component={LoginButton}/>
                 <Route path="/callback/" component={MainPage}/>
+                <BottomNav/>
             </div>
         </Router>
     );

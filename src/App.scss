@@ -1,8 +1,72 @@
+//variables
+$swipoGreen: #10D48E;
+$pureWhite: #FFFFFF;
+$richBlack: #0E0F0E;
+//card background
+$feldgrau: #506452;
+
+$standardRadius: 20px;
+
+* {
+    color: white;
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 .App {
-    background-color: black;
-    width: 100vw;
+    background-color: $richBlack;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+//top and bottom nav
+#TopNav {
+    border: 1px solid $swipoGreen;
+    width: 100%;
+    //hardcoded height, change later 
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    #profileButton {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background-color: $swipoGreen;
+        border: 1px solid $swipoGreen;
+    }
+
+    #swipoLogo {
+        width: 80px;
+        height: 40px;
+        
+    }
+    #tempButton {
+        //replace later with settings cog
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background-color: transparent;
+    }
+}
+ #BottomNav {
+     background-color: $feldgrau;
+     width: 100vw;
+     //hardcoded height, change later
+     height: 60px;
+     display:flex;
+     align-items: center;
+     justify-content: space-around;
+     border-radius: $standardRadius $standardRadius 0px 0px;
+
+ }
+
+
+ //single Song Card

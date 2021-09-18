@@ -10,10 +10,7 @@ function MainPage() {
             <p style={{color: "white"}}>
                 {access_token}
             </p>
-            <MainCard/>
-            <MainCard/>
-            <MainCard/>
-            <MainCard/>
+            
         </div>
     )
 }
