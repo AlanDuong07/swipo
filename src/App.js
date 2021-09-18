@@ -16,6 +16,7 @@ function App() {
                 <TopNav/>
                 <Route path="/" exact component={LoginButton}/>
                 <Route path="/callback/" component={MainPage}/>
+                
                 <BottomNav/>
             </div>
         </Router>
