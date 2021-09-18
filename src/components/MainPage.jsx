@@ -84,7 +84,7 @@ function MainPage() {
                     {
                         tracks.map((track) => 
                             <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name)} 
-                                onCardLeftScreen={() => outOfFrame(track.name)}>
+                                onCardLeftScreen={() => outOfFrame(track.name)} preventSwipe = {['up', 'down']}>
                                 <MainCard track={track}/>
                             </TinderCard>
                         )
