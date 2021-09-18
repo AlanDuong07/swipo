@@ -3,31 +3,31 @@ import MainCard from './MainCard'
 import SpotifyWebApi from 'spotify-web-api-js';
 function MainPage() {
     const access_token = new URLSearchParams(window.location.hash).get('#access_token');
-    const [playlistObject, setPlaylistObject] = useState("");
-    const [userInfo, setUserInfo] = useState("");
+    const [playlistTracks, setPlaylistTracks] = useState([]);
+    const [userID, setUserID] = useState("");
 
     useEffect(() => {
         const spotifyApi = new SpotifyWebApi();
         spotifyApi.setAccessToken(access_token);
         // get Elvis' albums, passing a callback. When a callback is passed, no Promise is returned
-        let playlistObject = spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
+        let playlistTracks = spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
             if (err) console.error(err);
             else {
-                console.log('Playlist Tracks', data);
-                setPlaylistObject(data);
-            };
-        });
-        let userInfo = spotifyApi.getMe(null, function (err, data) {
-            if (err) console.error(err);
-            else {
-                console.log('User Info', data);
-                setUserInfo(data);
+                console.log('Playlist Tracks', data.items);
+                setPlaylistTracks(data.items);
             }
         });
-    })
+        let userID = spotifyApi.getMe(null, function (err, data) {
+            if (err) console.error(err);
+            else {
+                console.log('User ID', data.id);
+                setUserID(data.id);
+            }
+        });
+    }, [userID])
     return (
         <div>
-            <MainCard access_token={access_token} playlistObject={playlistObject} userInfo={userInfo}/>
+            <MainCard access_token={access_token} playlistTracks={playlistTracks} userID={userID}/>
             
         </div>
     )
