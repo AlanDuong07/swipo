@@ -3,7 +3,7 @@ import {useState} from "react";
 export default function MainCard() {
 
     return (
-        <div>
+        <div style={{color:"white"}}>
             This is the main card
         </div>
     );
