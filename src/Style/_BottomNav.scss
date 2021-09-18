@@ -1,0 +1,61 @@
+$swipoGreen: #10D48E;
+$pureWhite: #FFFFFF;
+$richBlack: #0E0F0E;
+$altBlack: #161616;
+ 
+ #BottomNav {
+     background-color: $altBlack;
+     position: fixed;
+     width: 100%;
+     height: 10%;
+     bottom: 0;
+
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ // links in general
+    a{
+        display: flex;
+    }
+
+// profile
+    #playlist-link{
+        position: relative;
+        width: 33%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    #playlist {
+        width: 30px;
+        height: 25px;
+    }
+// logo
+    #home-link{
+        position: relative;
+        width: 34%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        border-right: $pureWhite 1px solid;
+        border-left: $pureWhite 1px solid;
+    }
+    #home {
+        height: 30px;
+        width: 30px;
+        position: relative;
+    }
+
+// settings
+    #random-link{
+        position: relative;
+        width: 33%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    #random {
+        width: 30px;
+        height: 25px;
+    }
+}

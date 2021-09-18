@@ -1,0 +1,51 @@
+$swipoGreen: #10D48E;
+$pureWhite: #FFFFFF;
+$richBlack: #0E0F0E;
+$altBlack: #161616;
+
+ .MainCard{
+     -ms-overflow-style: none;
+ }
+
+ // Main card
+// .MainCard {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 97%;
+//     max-width: 300px;
+//     background-color: $feldgrau;
+//     overflow:visible;
+//     height: 80%;
+//     border-radius: $standardRadius;
+// }
+
+// album cover
+.album-cover{
+    width: 50%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    resize: both;
+    // position: relative;
+}
+
+// Main card info
+.songInfo{
+    h1 {
+      background-color: blue;
+      font-weight: 600;
+      z-index: 10;
+      font-size: 15px;
+    }
+}
+
+
+// Audio player
+.audioPlayer{
+    display: absolute;
+    top: 90%;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}

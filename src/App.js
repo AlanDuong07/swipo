@@ -1,4 +1,4 @@
-import './App.scss';
+import './Style/App.scss';
 import React, { useState } from "react"
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import { SpotifyAuth, Scopes } from 'react-spotify-auth'

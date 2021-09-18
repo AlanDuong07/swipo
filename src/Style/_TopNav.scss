@@ -1,0 +1,59 @@
+$swipoGreen: #10D48E;
+$pureWhite: #FFFFFF;
+$richBlack: #0E0F0E;
+$altBlack: #161616;
+
+#TopNav {
+// general
+    position: fixed;
+    background-color: $altBlack;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+// links in general
+    a{
+        display: flex;
+    }
+
+// profile
+    #profile-link{
+        position: relative;
+        width: 10%;
+        height: 100%;
+    }
+    #profile {
+        width: 35px;
+        height: 35px;
+        margin-top: 50%;
+        margin-left: 20%;
+    }
+// logo
+    #SwipoLogo-link{
+        position: relative;
+        width: 80%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    #SwipoLogo {
+        height: 100%;
+        position: relative;
+        margin-top: 8%;
+    }
+
+// settings
+    #settings-link{
+        position: relative;
+        width: 10%;
+        height: 100%;
+    }
+    #settings {
+        width: 30px;
+        height: 30px;
+        margin-top: 50%;
+        margin-right: 20%;
+    }
+}

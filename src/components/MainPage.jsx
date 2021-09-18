@@ -52,7 +52,7 @@ function MainPage() {
                         tracks.map((track) => 
                             <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name)} 
                                 onCardLeftScreen={() => outOfFrame(track.name)}>
-                                <MainCard track={track}/>   
+                                <MainCard accessToken={access_token} track={track}/>
                             </TinderCard>
                         )
                     }
