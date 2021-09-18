@@ -46,11 +46,28 @@ function MainPage() {
             }
         });
     }, [userID])
-    return (
-        <div id="MainPage">
-            <MainCard access_token={access_token} playlistTracks={playlistTracks} userID={userID}/>
-        </div>
-    )
+    if (tracks !== undefined) {
+        return (
+            <div id="MainPage">
+                <div className='cardContainer'>
+                    {
+                        tracks.map((track) => 
+                            <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name)} 
+                                onCardLeftScreen={() => outOfFrame(track.name)}>
+                                <MainCard track={track}/>   
+                            </TinderCard>
+                        )
+                    }
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div id="MainPage">
+
+            </div>
+        )
+    }
 }
 
 function getTrackInfo(playlistTracks, songCounter) {
@@ -74,7 +91,7 @@ function getTrackInfo(playlistTracks, songCounter) {
 
 function createAllTracks(playlistTracks) {
     let tracks = [];
-    if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
+    if (playlistTracks === undefined || playlistTracks.length === 0) {
         console.log("createAllTracks terminated because playLists tracks is empty");
         return;
     }
