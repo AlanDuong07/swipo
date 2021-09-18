@@ -17,9 +17,8 @@ function MainPage() {
         });
     })
     return (
-        <div>
-            <MainCard access_token={access_token}/>
-            
+        <div id="MainPage">
+            <MainCard access_token={access_token}/> 
         </div>
     )
 }
