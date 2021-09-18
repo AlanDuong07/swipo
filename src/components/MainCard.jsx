@@ -1,9 +1,9 @@
 import React from 'react'
 
-function MainCard() {
+function MainCard(props) {
     return (
         <div className="MainCard">
-            This is the main card
+            This is the main card with {props.access_token}
         </div>
     )
 }

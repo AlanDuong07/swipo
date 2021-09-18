@@ -8,10 +8,7 @@ function MainPage() {
     
     return (
         <div>
-            <p style={{color: "white"}}>
-                {access_token}
-            </p>
-            
+            <MainCard access_token={access_token}/>
         </div>
     )
 }
