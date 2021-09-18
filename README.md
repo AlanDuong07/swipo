@@ -1,3 +1,10 @@
+#Swipo: The music discovery app that makes finding new music fun.
+
+This project was created during HackRice2021 by Alan Duong, Jacob Pan, Parv Shrivastava, and Marco Lagos using React. 
+
+Ever wanted to explore a new genre, but never have the time? Swipo allows you to quickly find new music, determine if you like it, and save it to a playlist. 
+And most of all, it makes all of that fun! 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
