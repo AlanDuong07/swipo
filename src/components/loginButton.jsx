@@ -3,7 +3,7 @@ import React from 'react'
 function loginButton() {
     return (
         <>
-            <a></a>
+            <a href='/callback'>Hi</a>
         </>
     )
 }
