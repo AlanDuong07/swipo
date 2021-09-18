@@ -2,13 +2,15 @@ import React, {useEffect, useRef, useState} from 'react'
 import MainCard from './MainCard'
 import SpotifyWebApi from 'spotify-web-api-js';
 import TinderCard from 'react-tinder-card';
+let userPlaylistID = ""
+
 function MainPage() {
     //get access token from url once. 
     const access_token = new URLSearchParams(window.location.hash).get('#access_token');
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
-    const [userPlaylistID, setUserPlaylistID] = useState("");
+    let [userPlaylistID, setUserPlaylistID] = useState("");
 
     //init state for tinder card
     const [lastDirection, setLastDirection] = useState()
@@ -16,12 +18,22 @@ function MainPage() {
     const playlistName = "Swipo 🔥🔥"
 
     //react-tinder functions
-    const swiped = (direction, nameToDelete) => {
-        console.log('removing: ' + nameToDelete);
+    const swiped = (direction, nameToDelete, songURI) => {
+        console.log('removing: ' + nameToDelete + "and direction: " + direction);
         setLastDirection(direction);
+        console.log("userplaylistid", userPlaylistID)
         if (userPlaylistID !== "") {
             if (direction === "right") {
-                // add to playlist
+                const spotifyApi = new SpotifyWebApi();
+                spotifyApi.setAccessToken(access_token);
+
+                spotifyApi.addTracksToPlaylist(userPlaylistID, [songURI], null,function (err, data) {
+                    if (err) console.error(err);
+                    else {
+                        //TODO: Add error handling message
+                        console.log("add track data", data)
+                    }
+                });
             }
         }
         // create new thing to say true that song was played
@@ -29,10 +41,10 @@ function MainPage() {
         tracksNew.find(track => track.name == nameToDelete).isSwiped++;
         setTracks(tracksNew);
     }
+
     const outOfFrame = (name) => {
         console.log(name + ' left the screen!')
     }
-
 
     //functions ran constantly to get playlist
     useEffect(() => {
@@ -60,34 +72,39 @@ function MainPage() {
         if (userID !== "") {
             spotifyApi.getUserPlaylists(userID,null, function (err, data) {
                 if (err) {
-                    console.error(err)
+                    console.error(err);
                 }
                 else {
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i].items.name === playlistName) {
-                            setUserPlaylistID(data[i].items.id)
+                    if (data !== undefined) {
+                        for (let i = 0; i < data.items.length; i++) {
+                            if (data.items[i].name === playlistName) {
+                                userPlaylistID = (data.items[i].id);
+                            }
                         }
+                    }
+
+                    if (userPlaylistID === "") {
+                        spotifyApi.createPlaylist(userID,{name: playlistName}, function (err, data) {
+                            if (err) console.error(err);
+                            else {
+                                userPlaylistID = (data.id)
+                            }
+                        });
                     }
                 }
             });
-            //playlist not found
-            if (userPlaylistID === "") {
-                spotifyApi.createPlaylist(userID,{name: playlistName}, function (err, data) {
-                    if (err) console.error(err);
-                    else {
-                        setUserPlaylistID(data.id)
-                    }
-                });
-            }
+
+
         }
-        }, [userID])
+        }, [userID, userPlaylistID]
+    )
     if (tracks !== undefined) {
         return (
             <div id="MainPage">
                 <div className='cardContainer'>
                     {
                         tracks.map((track) => 
-                            <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name)} 
+                            <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name, track.songURI)}
                                 onCardLeftScreen={() => outOfFrame(track.name)} preventSwipe = {['up', 'down']}>
                                 <MainCard track={track} isSwiped={track.isSwiped}/>
                             </TinderCard>
@@ -121,7 +138,8 @@ function getTrackInfo(playlistTracks, songCounter) {
     }
     const albumImageUrl = properties.album.images[0].url;
     const musicPreviewUrl = properties.preview_url;
-    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, isSwiped: 0};
+    const songURI = properties.uri;
+    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI, isSwiped: 0};
 }
 
 function createAllTracks(playlistTracks) {
