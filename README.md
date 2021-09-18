@@ -1,4 +1,4 @@
-#Swipo: The music discovery app that makes finding new music fun.
+# Swipo: The music discovery app that makes finding new music fun.
 
 This project was created during HackRice2021 by Alan Duong, Jacob Pan, Parv Shrivastava, and Marco Lagos using React. 
 
