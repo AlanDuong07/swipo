@@ -38,6 +38,7 @@ $standardRadius: 20px;
     #profileButton {
         width: 40px;
         height: 40px;
+        margin-left: 20px;
         border-radius: 100%;
         background-color: $swipoGreen;
         border: 1px solid $swipoGreen;
@@ -71,4 +72,21 @@ $standardRadius: 20px;
  }
 
 
- //single Song Card
+ //Main Page and Main Card
+#MainPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #MainCard {
+        display: flex;
+        width: 500px;
+        max-width: 500px;
+        @media (max-width: 425px) {
+            width: 90%;
+            max-width: 400px;
+        }
+        height: 400px;
+        background-color: $feldgrau;
+    }
+
+}
