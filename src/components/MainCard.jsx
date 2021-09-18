@@ -8,16 +8,21 @@ function MainCard(props) {
     const [playing, changePlaying] = useState(false);
     const player = useRef();
 
-    const pauseSong = () => {
-        player.current.audio.current.pause();
-    }
+    // change if song was swiped
+    useEffect(() => {
+        if (props.isSwiped >= 1){
+            // pause the song
+            player.current.audio.current.pause();
+            console.log(props.track);
+        }
+
+    }, [props]);
 
     return (
         <div className="MainCard">
             
             This track is {props.track.name}.
             The artists of this track is {props.track.artists}
-            <button onClick={pauseSong}>Pause</button>
             <AudioPlayer
                 autoPlay={false}
                 src={props.track.musicPreviewUrl}
