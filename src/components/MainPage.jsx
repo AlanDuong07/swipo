@@ -5,6 +5,7 @@ function MainPage() {
 
     const access_token = new URLSearchParams(window.location.hash).get('#access_token');
 
+    
     return (
         <div>
             <p style={{color: "white"}}>

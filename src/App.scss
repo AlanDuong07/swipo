@@ -44,9 +44,10 @@ $standardRadius: 20px;
     }
 
     #swipoLogo {
-        width: 80px;
         height: 40px;
-        
+        h1 {
+            text-decoration: none;
+        }
     }
     #tempButton {
         //replace later with settings cog
