@@ -5,11 +5,11 @@ import TinderCard from 'react-tinder-card';
 function MainPage() {
     //get access token from url once. 
     const access_token = new URLSearchParams(window.location.hash).get('#access_token');
-    //init state for playlist tracks
-    const [playlistTracks, setPlaylistTracks] = useState([]);
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
+    const [playlistMade, setPlaylistMade] = useState(false)
+
     //init state for tinder card
     const [lastDirection, setLastDirection] = useState()
 
@@ -32,9 +32,7 @@ function MainPage() {
         spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
             if (err) console.error(err);
             else {
-                // console.log('Playlist Tracks', data.items);
-                setPlaylistTracks(data.items);
-                setTracks(createAllTracks(playlistTracks));
+                setTracks(createAllTracks(data.items));
                 console.log('Tracks object for tinder swipe', tracks);
             }
         });
