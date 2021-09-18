@@ -9,6 +9,7 @@ function MainPage() {
     const [playlistTracks, setPlaylistTracks] = useState([]);
     //init state for userID
     const [userID, setUserID] = useState("");
+    const [tracks, setTracks] = useState([]);
 
 
     //react-tinder functions
@@ -38,12 +39,41 @@ function MainPage() {
                 setUserID(data.id);
             }
         });
+
+        setTracks(createAllTracks(playlistTracks))
     }, [userID])
     return (
         <div id="MainPage">
             <MainCard access_token={access_token} playlistTracks={playlistTracks} userID={userID}/>
         </div>
     )
+}
+
+function getTrackInfo(playlistTracks, songCounter) {
+    console.log("playlist tracks", playlistTracks)
+    if (playlistTracks === undefined || playlistTracks.length === 0) {
+        return [];
+    }
+
+    const properties = playlistTracks[songCounter].track;
+    const songName = properties.name;
+    let artists = "";
+    for (let i = 0; i < properties.artists.length; i++) {
+        artists.concat(properties.artists[i].name);
+        if (i === properties.artists.length - 1) artists.concat(", ");
+    }
+    const albumImageUrl = properties.album.images[0].url;
+    const musicPreviewUrl = properties.preview_url;
+    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl};
+}
+
+function createAllTracks(playlistTracks) {
+    let tracks = [];
+    for (let i = 0; i < playlistTracks.length; i++) {
+        tracks.push(getTrackInfo(playlistTracks, i));
+    }
+
+    return tracks
 }
 
 export default MainPage
