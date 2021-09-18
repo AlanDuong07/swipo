@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import MainCard from './MainCard'
 import SpotifyWebApi from 'spotify-web-api-js';
 import TinderCard from 'react-tinder-card';
@@ -8,7 +8,7 @@ function MainPage() {
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
-    const [userPlaylistID, setUserPlaylistID] = useState("")
+    const [userPlaylistID, setUserPlaylistID] = useState("");
 
     //init state for tinder card
     const [lastDirection, setLastDirection] = useState()
@@ -24,6 +24,10 @@ function MainPage() {
                 // add to playlist
             }
         }
+        // create new thing to say true that song was played
+        const tracksNew = [...tracks];
+        tracksNew.find(track => track.name == nameToDelete).isSwiped++;
+        setTracks(tracksNew);
     }
     const outOfFrame = (name) => {
         console.log(name + ' left the screen!')
@@ -85,7 +89,7 @@ function MainPage() {
                         tracks.map((track) => 
                             <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name)} 
                                 onCardLeftScreen={() => outOfFrame(track.name)}>
-                                <MainCard track={track}/>
+                                <MainCard track={track} isSwiped={track.isSwiped}/>
                             </TinderCard>
                         )
                     }
@@ -117,7 +121,7 @@ function getTrackInfo(playlistTracks, songCounter) {
     }
     const albumImageUrl = properties.album.images[0].url;
     const musicPreviewUrl = properties.preview_url;
-    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl};
+    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, isSwiped: 0};
 }
 
 function createAllTracks(playlistTracks) {
