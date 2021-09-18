@@ -2,7 +2,7 @@ import React from 'react'
 
 function MainCard() {
     return (
-        <div style={{color:"white"}}>
+        <div className="MainCard">
             This is the main card
         </div>
     )
