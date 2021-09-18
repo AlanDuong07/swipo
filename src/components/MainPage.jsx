@@ -26,9 +26,8 @@ function MainPage() {
         });
     }, [userID])
     return (
-        <div>
+        <div id="MainPage">
             <MainCard access_token={access_token} playlistTracks={playlistTracks} userID={userID}/>
-            
         </div>
     )
 }

@@ -7,17 +7,18 @@ $feldgrau: #506452;
 
 $standardRadius: 20px;
 
-* {
+body {
     color: white;
     font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
+    
 }
 
 .App {
     background-color: $richBlack;
-    width: 100%;
     height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,16 +78,17 @@ $standardRadius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    #MainCard {
+    .MainCard {
         display: flex;
         width: 500px;
         max-width: 500px;
+        background-color: $feldgrau;
         @media (max-width: 425px) {
             width: 90%;
             max-width: 400px;
         }
         height: 400px;
-        background-color: $feldgrau;
+        border-radius: $standardRadius;
     }
 
 }
