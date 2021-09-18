@@ -83,6 +83,7 @@ body {
         width: 500px;
         max-width: 500px;
         background-color: $feldgrau;
+        overflow:visible;
         @media (max-width: 425px) {
             width: 90%;
             max-width: 400px;
