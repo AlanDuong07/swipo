@@ -25,7 +25,6 @@ function MainPage() {
             }
         }
     }
-    
     const outOfFrame = (name) => {
         console.log(name + ' left the screen!')
     }
@@ -51,7 +50,9 @@ function MainPage() {
                 setUserID(data.id);
             }
         });
-
+        //if id is found, get the users playlists and see if a swipo playlist is already there.
+        //if it is, setUserPlaylistID.
+        //if it isn't create Playlist and retrieve that playlist id
         if (userID !== "") {
             spotifyApi.getUserPlaylists(userID,null, function (err, data) {
                 if (err) {
@@ -65,7 +66,7 @@ function MainPage() {
                     }
                 }
             });
-
+            //playlist not found
             if (userPlaylistID === "") {
                 spotifyApi.createPlaylist(userID,{name: playlistName}, function (err, data) {
                     if (err) console.error(err);
