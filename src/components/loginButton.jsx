@@ -1,11 +1,16 @@
-import React from 'react'
-
-function loginButton() {
+import React, { useState } from "react"
+import { SpotifyAuth, Scopes } from 'react-spotify-auth'
+import 'react-spotify-auth/dist/index.css'
+function LoginButton() {
+    const [token, setToken] = React.useState(0)
     return (
-        <>
-            <a href='../callback'>Hi</a>
-        </>
+        <SpotifyAuth
+                    redirectUri='http://localhost:3000/callback/'
+                    clientID='ba8410471b294344b293d5d6270ec54f'
+                    scopes={[Scopes.userReadPrivate, 'user-read-email']} // either style will work
+                    onAccessToken={(token) => setToken(token)}
+                />
     )
 }
 
-export default loginButton
+export default LoginButton

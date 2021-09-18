@@ -1,12 +1,19 @@
-import {useState} from "react";
-import MainCard from "./MainCard";
-
-export default function MainPage() {
-
+import React from 'react'
+import MainCard from './MainCard'
+function MainPage() {
+    
     return (
         <div>
-            <div style='color: white'>Here is the main page</div>
+            <p style={{color: "white"}}>
+                
+            </p>
+            <MainCard/>
+            <MainCard/>
+            <MainCard/>
             <MainCard/>
         </div>
-    );
+    )
 }
+
+export default MainPage
+

@@ -1,10 +1,13 @@
-import {useState} from "react";
+import React from 'react'
 
-export default function MainCard() {
-
+function MainCard() {
     return (
         <div>
-            This is the main card
+            <p>
+                This is a main card.
+            </p>
         </div>
-    );
+    )
 }
+
+export default MainCard
