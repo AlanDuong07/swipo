@@ -1,19 +1,28 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 //mainCard receives names, artists, albumImageUrl, musicPreviewUrl
 function MainCard(props) {
+    const [playing, changePlaying] = useState(false);
+    const player = useRef();
+
+    const pauseSong = () => {
+        player.current.audio.current.pause();
+    }
+
     return (
         <div className="MainCard">
             
             This track is {props.track.name}.
             The artists of this track is {props.track.artists}
+            <button onClick={pauseSong}>Pause</button>
             <AudioPlayer
-                autoPlay
+                autoPlay={false}
                 src={props.track.musicPreviewUrl}
                 onPlay={e => console.log("onPlay")}
+                ref={player}
                 // other props here
             />
         </div>
