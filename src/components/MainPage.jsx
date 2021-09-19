@@ -9,15 +9,13 @@ import BottomNav from './BottomNav';
 let userPlaylistID = ""
 
 function MainPage() {
-    //get access token from url once. 
-    const access_token = new URLSearchParams(window.location.hash).get('#access_token');
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
-    let [userPlaylistID, setUserPlaylistID] = useState("");
-
-    //init state for tinder card
+    //let [userPlaylistID, setUserPlaylistID] = useState("");
     const [lastDirection, setLastDirection] = useState()
+    const accessToken = new URLSearchParams(window.location.hash).get('#access_token');
+    const playlistId = new URLSearchParams(window.location.hash).get('playlistId');
 
     const playlistName = "Swipo 🔥🔥"
 
@@ -29,7 +27,7 @@ function MainPage() {
         if (userPlaylistID !== "") {
             if (direction === "right") {
                 const spotifyApi = new SpotifyWebApi();
-                spotifyApi.setAccessToken(access_token);
+                spotifyApi.setAccessToken(accessToken);
 
                 spotifyApi.addTracksToPlaylist(userPlaylistID, [songURI], null,function (err, data) {
                     if (err) console.error(err);
@@ -53,7 +51,7 @@ function MainPage() {
     //functions ran constantly to get playlist
     useEffect(() => {
         const spotifyApi = new SpotifyWebApi();
-        spotifyApi.setAccessToken(access_token);
+        spotifyApi.setAccessToken(accessToken);
         
         spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
             if (err) console.error(err);
@@ -97,8 +95,6 @@ function MainPage() {
                     }
                 }
             });
-
-
         }
         }, [userID, userPlaylistID]
     )
@@ -130,7 +126,6 @@ function MainPage() {
 }
 
 function getTrackInfo(playlistTracks, songCounter) {
-    // console.log("starting getTrackInfo: playlist tracks", playlistTracks);
     if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
         console.log("playlistTracks is undefined or 0, ");
         return [];
