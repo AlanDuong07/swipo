@@ -3,7 +3,7 @@ $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
 $altBlack: #161616;
 
-#TopNav {
+.top-nav {
 // general
     position: fixed;
     background-color: $altBlack;
@@ -31,14 +31,14 @@ $altBlack: #161616;
         margin-left: 20%;
     }
 // logo
-    #SwipoLogo-link{
+    #swipo-logo-link{
         position: relative;
         width: 80%;
         height: 100%;
         align-items: center;
         justify-content: center;
     }
-    #SwipoLogo {
+    #swipo-logo {
         height: 100%;
         position: relative;
         margin-top: 8%;

@@ -6,7 +6,7 @@ import random from "../images/random.png";
 
 function BottomNav() {
     return (
-        <div id="BottomNav">
+        <div className="bottom-nav">
             <a href="#" id="playlist-link">
                 <img src={playlist} alt="playlist" id="playlist"></img>
             </a>

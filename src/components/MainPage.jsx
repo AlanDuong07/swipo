@@ -2,6 +2,10 @@ import React, {useEffect, useRef, useState} from 'react'
 import MainCard from './MainCard'
 import SpotifyWebApi from 'spotify-web-api-js';
 import TinderCard from 'react-tinder-card';
+
+import TopNav from './TopNav';
+import BottomNav from './BottomNav';
+
 let userPlaylistID = ""
 
 function MainPage() {
@@ -101,6 +105,7 @@ function MainPage() {
     if (tracks !== undefined) {
         return (
             <div id="MainPage">
+                <TopNav/>
                 <div className='cardContainer'>
                     {
                         tracks.map((track) => 
@@ -111,12 +116,14 @@ function MainPage() {
                         )
                     }
                 </div>
+                <BottomNav/>
             </div>
         )
     } else {
         return (
             <div id="MainPage">
-
+                <TopNav/>
+                <BottomNav/>
             </div>
         )
     }

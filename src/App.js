@@ -5,19 +5,15 @@ import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import 'react-spotify-auth/dist/index.css'
 
 import MainPage from "./components/MainPage.jsx";
-import LoginButton from "./components/LoginButton";
-import TopNav from './components/TopNav';
-import BottomNav from './components/BottomNav';
+import LoginPage from "./components/LoginPage";
+
 function App() {
 
     return (
         <Router>
             <div className="App">
-                <TopNav/>
-                <Route path="/" exact component={LoginButton}/>
-                <Route path="/callback/" component={MainPage}/>
-                
-                <BottomNav/>
+                <Route path="/" exact component={LoginPage} />
+                <Route path="/callback/" component={MainPage} />
             </div>
         </Router>
     );
