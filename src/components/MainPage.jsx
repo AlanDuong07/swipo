@@ -140,9 +140,12 @@ function getTrackInfo(playlistTracks, songCounter) {
     const songName = properties.name;
     let artists = "";
     for (let i = 0; i < properties.artists.length; i++) {
-        artists.concat(properties.artists[i].name);
-        if (i === properties.artists.length - 1) artists.concat(", ");
+        artists += properties.artists[i].name;
+        console.log("artist right now:", properties.artists[i].name)
+        console.log("artists string right now:", artists)
+        if (i !== properties.artists.length - 1) artists += ", ";
     }
+
     const albumImageUrl = properties.album.images[0].url;
     const musicPreviewUrl = properties.preview_url;
     const songURI = properties.uri;
