@@ -17,8 +17,8 @@ function PickGenrePage() {
         let playlistId;
         spotifyApi.searchPlaylists(query, null).then(
             function (data) {
-                if (data === undefined) {
-
+                if (data.playlists.items.length === 0) {
+                    //Try again
                 } else {
                     playlistId = data.playlists.items[0].id
                     let path = "/main/#access_token=" + accessToken + "&playlistId=" + playlistId + "&genre=" + genre
