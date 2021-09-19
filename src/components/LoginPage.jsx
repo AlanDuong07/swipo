@@ -12,7 +12,7 @@ function LoginPage() {
                 <img src={SwipoLogoLogin} alt="SwipoLogo" id="swipo-logo"></img>
             </div>
             <div id="login-button"><SpotifyAuth
-                    redirectUri='http://swipoapp.herokuapp.com/pick_genre/'
+                    redirectUri='http://localhost:3000/pick_genre/'
                     clientID='ba8410471b294344b293d5d6270ec54f'
                     scopes={[Scopes.userReadPrivate, Scopes.userReadEmail, Scopes.playlistReadPrivate,
                         Scopes.playlistModifyPrivate, Scopes.playlistModifyPublic, Scopes.playlistReadCollaborative]}
