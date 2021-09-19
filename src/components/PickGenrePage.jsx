@@ -31,14 +31,16 @@ function PickGenrePage() {
     const handleChange = (event) => {
         setGenre(event.target.value);
     }
-
+  
     return (
-        <div id="PickGenrePage">
-            <TopNav/>
-            <input type="text" onChange={handleChange}/>
-            <button type="submit" onClick={routeToMain}>
+        <div className="PickGenrePage">
+            <TopNav />
+            <div id="search-bar">
+                <input id="input" type="text" placeholder="search for genre..." onChange={handleChange}/>
+            <button id="button" type="submit" onClick={routeToMain}>
                 Go!
             </button>
+            </div>
             <BottomNav/>
         </div>
     )
