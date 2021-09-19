@@ -12,7 +12,6 @@ function MainPage() {
     //init state for userID
     const [userID, setUserID] = useState("");
     const [tracks, setTracks] = useState([]);
-    //let [userPlaylistID, setUserPlaylistID] = useState("");
     const [lastDirection, setLastDirection] = useState()
     const accessToken = new URLSearchParams(window.location.hash).get('#access_token');
     const playlistId = new URLSearchParams(window.location.hash).get('playlistId');

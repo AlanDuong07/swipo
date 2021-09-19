@@ -24,7 +24,6 @@ function MainCard(props) {
             <div id="audio">
                 <AudioPlayer
                     autoPlay={false}
-                    volume={false}
                 src={props.track.musicPreviewUrl}
                 onPlay={e => console.log("onPlay")}
                 ref={player} />
