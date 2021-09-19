@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { SpotifyAuth, Scopes } from 'react-spotify-auth'
 import 'react-spotify-auth/dist/index.css'
 
-import SwipoLogoLogin from "../images/SwipoLogoLogin.svg";
+import SwipoLogoLogin from "../images/SwipoLogoLogin.png";
 
 function LoginPage() {
     const [token, setToken] = React.useState(0)

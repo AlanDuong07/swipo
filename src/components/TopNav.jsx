@@ -1,5 +1,5 @@
 import React from 'react'
-import SwipoLogo from "../images/SwipoLogo.svg";
+import SwipoLogo from "../images/SwipoLogo.png";
 import cog from "../images/cog.png";
 import profile from "../images/profile.png";
 
