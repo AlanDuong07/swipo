@@ -14,12 +14,18 @@ function PickGenrePage() {
     const history = useHistory();
 
     const routeToMain = () => {
-        let parsedInput = genre.split(' ').join('+')
-        console.log("jacob is the goat", parsedInput)
-        let path = "/main/#access_token=" + accessToken + "/playlistId=" + getTopPlaylist(accessToken, parsedInput)
-        console.log("function call", getTopPlaylist(accessToken, parsedInput))
-        console.log("path", path)
-        history.push(path);
+        let query = genre.split(' ').join('+')
+
+        const spotifyApi = new SpotifyWebApi();
+        spotifyApi.setAccessToken(accessToken);
+        let playlistId;
+        spotifyApi.searchPlaylists(query, null).then(
+            function (data) {
+                playlistId = data.playlists.items[0].id
+                let path = "/main/#access_token=" + accessToken + "&playlistId=" + playlistId
+                history.push(path);
+            }
+        );
     }
 
     const handleChange = (event) => {
@@ -36,20 +42,6 @@ function PickGenrePage() {
             <BottomNav/>
         </div>
     )
-}
-
-function getTopPlaylist(accessToken, query) {
-    const spotifyApi = new SpotifyWebApi();
-    spotifyApi.setAccessToken(accessToken);
-    spotifyApi.searchPlaylists(query, null, function (err, data) {
-        if (err) console.error(err);
-        else {
-            console.log("yo this is the top playlists", data.playlists.items[0].id)
-            return data.playlists.items[0].id
-        }
-    });
-    console.log("does this get here????")
-    return ""
 }
 
 export default PickGenrePage

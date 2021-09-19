@@ -52,7 +52,7 @@ function MainPage() {
         const spotifyApi = new SpotifyWebApi();
         spotifyApi.setAccessToken(accessToken);
         
-        spotifyApi.getPlaylistTracks('37i9dQZF1DWWBHeXOYZf74', function (err, data) {
+        spotifyApi.getPlaylistTracks(playlistId, function (err, data) {
             if (err) console.error(err);
             else {
                 setTracks(createAllTracks(data.items));
