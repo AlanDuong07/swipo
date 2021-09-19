@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 
 import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
+// import 'react-h5-audio-player/lib/styles.css';
 
 // mainCard receives names, artists, albumImageUrl, musicPreviewUrl
 function MainCard(props) {
@@ -23,11 +23,18 @@ function MainCard(props) {
             <h2 id="artist">{props.track.artists}</h2>
             <div id="audio">
                 <AudioPlayer
+                    className="rhap_container"
                     autoPlay={false}
                     volume={false}
-                src={props.track.musicPreviewUrl}
-                onPlay={e => console.log("onPlay")}
-                ref={player} />
+                    src={props.track.musicPreviewUrl}
+                    onPlay={e => console.log("onPlay")}
+                    ref={player}
+                    showJumpControls={false}
+                    showSkipControls={false}
+                    hasDefaultKeyBindings={false}
+                    loop={true}
+
+                />
             </div>
         </div>
     )
