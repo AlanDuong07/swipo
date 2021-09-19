@@ -20,10 +20,11 @@ function MainCard(props) {
         <div className="mainCard">
             <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
             <h1 id="songName">{props.track.name}</h1>
-            <h1 id="artist">{props.track.artists}</h1>
+            <h2 id="artist">{props.track.artists}</h2>
             <div id="audio">
                 <AudioPlayer
-                autoPlay={false}
+                    autoPlay={false}
+                    volume={false}
                 src={props.track.musicPreviewUrl}
                 onPlay={e => console.log("onPlay")}
                 ref={player} />
