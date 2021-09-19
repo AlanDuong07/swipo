@@ -3,18 +3,19 @@ $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
 $altBlack: #161616;
 
-.main-card{
+.mainCard{
+    
+    border: 1px solid $swipoGreen;
+    #albumCover{
         
-}
-#album-cover{
-        
-}
-#song-name{
-
-}
-#artist{
-
-}
-#audio{
-
+    }
+    #songName{
+    
+    }
+    #artist{
+    
+    }
+    #audio{
+    
+    }
 }
