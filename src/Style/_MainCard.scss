@@ -4,21 +4,33 @@ $richBlack: #0E0F0E;
 $altBlack: #161616;
 
 .mainCard{
-    margin: 0 auto;
-    color: white;
+    margin: 30px auto 0px auto;
     position: relative;
-    height: 60%;
-    width: 450px;
+    color: white;
+    height: auto;
+    width: 375px;
+    border: 2px solid $swipoGreen;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     @media (max-width: 475px) {
         width: 80%;
+        height: 50vh;
     }
     overflow: hidden;
-
+    margin-bottom: 500px;
 
 
     #albumCover{
         height: 300px;
-        width: 300px; 
+        width: 300px;
+        @media (max-width: 475px) {
+            height: 30%;
+            width: 30%;
+        }
+        margin-top: 40px; 
+        margin-bottom: 5px;
     }
     #songName{
         margin: 0;
@@ -31,9 +43,11 @@ $altBlack: #161616;
         margin: 0;
         padding: 0;
         text-align: center;
-        font-weight: 400;
+        font-weight: 300;
         height: 50px;
         font-size: 20px;
+        opacity: 70%;
+
     }
     #audio{
         width: 100%;
