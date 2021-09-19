@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-@import './TopNav', './BottomNav','./MainCard','./LoginPage';
+@import './TopNav', './BottomNav','./MainCard','./LoginPage', './PickGenrePage';
 
 
 $swipoGreen: #10D48E;
@@ -25,7 +25,6 @@ body {
 .App {
     // sets background
     background-color: $richBlack;
-    position: absolute;
     height: 100vh;
     width: 100vw;
 }
