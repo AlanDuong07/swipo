@@ -13,7 +13,8 @@ function App() {
         <Router>
             <div className="App">
                 <Route path="/" exact component={LoginPage} />
-                <Route path="/callback/" component={MainPage} />
+                <Route path="/pick_genre/" component={PickGenrePage} />
+                <Route path="/main/" component={MainPage} />
             </div>
         </Router>
     );
