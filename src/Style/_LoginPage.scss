@@ -4,14 +4,30 @@ $richBlack: #0E0F0E;
 $altBlack: #161616;
 
 .login-page{
-    
-}
-#logo{
-        
-}
-#swipo-logo{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
-}
-#login-button{
-        
+    #logo{
+        border: white 2px solid;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #swipo-logo{
+        border: white 2px solid;
+    margin-bottom: 50%;
+    width: 400px;
+    @media (max-width: 475px){
+        width: 90%;
+        }
+    }
+    #login-button{
+        border: white 2px solid;
+        position: absolute;
+    }
 }
