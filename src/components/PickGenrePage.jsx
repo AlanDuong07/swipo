@@ -6,11 +6,7 @@ import { useHistory } from "react-router-dom";
 
 function PickGenrePage() {
     const [genre, setGenre] = useState('');
-    let playlistId;
-
-    //get access token from url once.
     const accessToken = new URLSearchParams(window.location.hash).get('#access_token');
-
     const history = useHistory();
 
     const routeToMain = () => {
@@ -21,9 +17,13 @@ function PickGenrePage() {
         let playlistId;
         spotifyApi.searchPlaylists(query, null).then(
             function (data) {
-                playlistId = data.playlists.items[0].id
-                let path = "/main/#access_token=" + accessToken + "&playlistId=" + playlistId + "&genre=" + genre
-                history.push(path);
+                if (data === undefined) {
+
+                } else {
+                    playlistId = data.playlists.items[0].id
+                    let path = "/main/#access_token=" + accessToken + "&playlistId=" + playlistId + "&genre=" + genre
+                    history.push(path);
+                }
             }
         );
     }

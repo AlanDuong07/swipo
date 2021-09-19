@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.StrictMode scalesPageToFit={false}>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
