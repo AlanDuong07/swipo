@@ -5,6 +5,8 @@ $altBlack: #161616;
  
  .bottom-nav {
     background-color: $altBlack;
+    position: fixed;
+    bottom: 0;
     width: 100vw;
     height: 70px;
     display: flex;
