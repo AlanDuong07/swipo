@@ -4,18 +4,23 @@ $richBlack: #0E0F0E;
 $altBlack: #161616;
 
 .mainCard{
-    
-    border: 1px solid $swipoGreen;
+    border: green 5px solid;
+    position: relative;
+    height: 100%;
+    width: 100%;
     #albumCover{
-        
+        height: 300px;
+        width: 300px;
+        border: red 2px solid;   
     }
     #songName{
-    
+        border: white 2px solid;
     }
     #artist{
-    
+        border: blue 2px solid;
     }
     #audio{
-    
+        width: 50%;
+        border: yellow 2px solid;
     }
 }
