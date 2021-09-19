@@ -17,9 +17,9 @@ function MainCard(props) {
     }, [props]);
 
     return (
-        <div className="main-card">
-            <img src={props.track.albumImageUrl} alt="Album/Song cover" id="album-cover"></img>
-            <h1 id="song-name">{props.track.name}</h1>
+        <div className="mainCard">
+            <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
+            <h1 id="songName">{props.track.name}</h1>
             <h1 id="artist">{props.track.artists}</h1>
             <div id="audio">
                 <AudioPlayer
