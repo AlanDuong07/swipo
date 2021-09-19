@@ -12,22 +12,20 @@ $altBlack: #161616;
     flex-direction: column;
 
     #logo{
-        border: white 2px solid;
         position: absolute;
         display: flex;
         align-items: center;
         justify-content: center;
     }
     #swipo-logo{
-        border: white 2px solid;
-    margin-bottom: 50%;
-    width: 400px;
-    @media (max-width: 475px){
-        width: 90%;
-        }
+        margin-bottom: 65%;
+        width: 400px;
+        @media (max-width: 475px){
+            width: 90%;
+            }
     }
     #login-button{
-        border: white 2px solid;
+        padding-top: 200px;
         position: absolute;
     }
 }
