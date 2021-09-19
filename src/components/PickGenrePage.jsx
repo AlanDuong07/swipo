@@ -22,7 +22,7 @@ function PickGenrePage() {
         spotifyApi.searchPlaylists(query, null).then(
             function (data) {
                 playlistId = data.playlists.items[0].id
-                let path = "/main/#access_token=" + accessToken + "&playlistId=" + playlistId
+                let path = "/main/#access_token=" + accessToken + "&playlistId=" + playlistId + "&genre=" + genre
                 history.push(path);
             }
         );

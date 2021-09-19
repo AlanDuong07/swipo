@@ -15,8 +15,9 @@ function MainPage() {
     const [lastDirection, setLastDirection] = useState()
     const accessToken = new URLSearchParams(window.location.hash).get('#access_token');
     const playlistId = new URLSearchParams(window.location.hash).get('playlistId');
+    const genre = new URLSearchParams(window.location.hash).get('genre');
 
-    const playlistName = "Swipo 🔥🔥"
+    const playlistName = "Swipo 🔥🔥 - " + genre
 
     //react-tinder functions
     const swiped = (direction, nameToDelete, songURI) => {
