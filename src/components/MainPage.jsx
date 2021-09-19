@@ -35,7 +35,7 @@ function MainPage() {
                     if (err) console.error(err);
                     else {
                         //TODO: Add error handling message
-                        console.log("add track data", data)
+                        console.log("add track dataaaaaaa", data)
                     }
                 });
             }
@@ -141,8 +141,6 @@ function getTrackInfo(playlistTracks, songCounter) {
     let artists = "";
     for (let i = 0; i < properties.artists.length; i++) {
         artists += properties.artists[i].name;
-        console.log("artist right now:", properties.artists[i].name)
-        console.log("artists string right now:", artists)
         if (i !== properties.artists.length - 1) artists += ", ";
     }
 

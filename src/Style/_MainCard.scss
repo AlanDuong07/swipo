@@ -5,19 +5,13 @@ $altBlack: #161616;
 
 .mainCard{
     margin: 30px auto 0px auto;
-    position: relative;
     color: white;
-    height: auto;
-    width: 375px;
+    max-width: 375px;
     border: 2px solid $swipoGreen;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    @media (max-width: 475px) {
-        width: 80%;
-        height: 50vh;
-    }
     overflow: hidden;
     margin-bottom: 500px;
 
@@ -25,10 +19,6 @@ $altBlack: #161616;
     #albumCover{
         height: 300px;
         width: 300px;
-        @media (max-width: 475px) {
-            height: 30%;
-            width: 30%;
-        }
         margin-top: 40px; 
         margin-bottom: 5px;
     }
