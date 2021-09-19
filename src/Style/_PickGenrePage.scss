@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 $swipoGreen: #10D48E;
 $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
@@ -5,7 +7,7 @@ $altBlack: #161616;
 
 $input-font-size: 30px;
 $input-line-height: 70px;
-$font-family: Roboto Slab, sans-serif;
+$font-family: 'Montserrat', sans-serif;
 
 .PickGenrePage {
     display: flex; 
@@ -21,6 +23,9 @@ $font-family: Roboto Slab, sans-serif;
     align-items: center;
     border-radius:  3px;
     width: 50%;
+    position: absolute;
+    top: 35%;
+    
     input {
         height: 60px;
         width: 100%;
@@ -31,17 +36,15 @@ $font-family: Roboto Slab, sans-serif;
         background-color: transparent;
         color: white;
         font-size: $input-font-size;
+        @media (max-width: 475px){
+            font-size: 15px;
+            height: 40px;
+        }
         border: none;
         outline: none;
-        border-bottom: 3px solid #333333;
+        border-bottom: 3px solid $swipoGreen;
         font-family: $font-family;
-
-        &:focus {
-            + .input-highlight {
-            border-top: 3px solid #fbc91b;
-            }
         }
-}
 
   button {
     position: relative;
@@ -51,19 +54,16 @@ $font-family: Roboto Slab, sans-serif;
     cursor: pointer;
     height: 40px;
     width: 120px;
-    color: #fff;
-    background: transparent;
-    border-radius: 0 3px 3px 0;
-    &:hover {
-      background: #fff;
-      color:#444;
+    background-color: transparent;
+    @media (max-width: 475px){
+        margin-bottom: 20px;
     }
-    &:active {
-      box-shadow: 0px 0px 12px 0px rgba(225, 225, 225, 1);
-    }
-    &:focus {
-      outline: 0;
-    }
+
+  img{
+      padding: 15px;
+      width: 30px;
+      height: 30px;
+  }
   }  
 
 }

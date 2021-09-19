@@ -3,6 +3,7 @@ import TopNav from './TopNav';
 import BottomNav from './BottomNav';
 import SpotifyWebApi from "spotify-web-api-js";
 import { useHistory } from "react-router-dom";
+import magglass from "../images/magglass.png";
 
 function PickGenrePage() {
     const [genre, setGenre] = useState('');
@@ -37,9 +38,9 @@ function PickGenrePage() {
             <TopNav />
             <div id="search-bar">
                 <input id="input" type="text" placeholder="search for genre..." onChange={handleChange}/>
-            <button id="button" type="submit" onClick={routeToMain}>
-                Go!
-            </button>
+                <button id="button" type="submit" onClick={routeToMain}>
+                        <img src={magglass} alt="Search Button"></img>
+                </button>
             </div>
             <BottomNav/>
         </div>
