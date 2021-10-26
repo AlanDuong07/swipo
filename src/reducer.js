@@ -4,7 +4,8 @@ export const initialState = {
     spotify: null,
     current_playlist: null,
     current_tracks: null,
-    swipo_playlist: null,
+    current_track: null,
+    swipo_playlist: null
   };
   
   const reducer = (state, action) => {
@@ -37,6 +38,11 @@ export const initialState = {
             return {
             ...state,
             current_tracks: action.current_tracks,
+            };
+        case "SET_CURRENT_TRACK":
+            return {
+            ...state,
+            current_track: action.current_track,
             };
         case "SET_SWIPO_PLAYLIST":
             console.log("setting swipo playlist", action);

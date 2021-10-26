@@ -1,20 +1,25 @@
 import React, {useEffect, useRef} from 'react'
-
-import AudioPlayer from 'react-h5-audio-player';
+import { useStateValue } from '../StateProvider'
+import AudioPlayer from 'react-h5-audio-player'
 // import 'react-h5-audio-player/lib/styles.css';
 
-// mainCard receives names, artists, albumImageUrl, musicPreviewUrl
 function MainCard(props) {
-    
-    // end previous song and play next song if swipe
+    const [{ current_track, playing }] = useStateValue()
+
     const player = useRef();
+    //useEffect that checks whenever the current_track has changed, and whether the current_track is this individual MainCard.
+    //if it is, then play the audio for this individual MainCard. If not, then don't play it.
     useEffect(() => {
-        if (props.isSwiped >= 1){
-            // end the song
-            player.current.audio.current.pause();
-            // console.log(props.track);
+        if (current_track !== null) {
+            // console.log("In useEffect for mainCard, current_track != null!. current_track.songURI: ", current_track.songURI)
+            // console.log("Current card's songURI: ", props.songURI)
+            if (current_track.songURI === props.songURI) {
+                player.current.audio.current.play()
+            } else {
+                player.current.audio.current.pause()
+            }
         }
-    }, [props]);
+    }, [current_track, playing, props])
 
     return (
         <div className="mainCard">

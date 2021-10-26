@@ -19,15 +19,17 @@ function Player() {
     //functions on load and whenever the current playlist changes
     useEffect(() => {
         if (spotify != null && current_playlist != null) {
-        // if (spotify != null) {
-            // current_playlist_id = current_playlist.id
-            // "5xCQwo3SrwMwShAWLRjdTC"
             spotify.getPlaylistTracks(current_playlist.id, function (err, data) {
                 if (err) console.error("Couldn't get the playlist tracks! current_playlist_id and error is: " + current_playlist_id + err);
                 else {
+                    let tracks_object = createAllTracks(data.items)
                     dispatch({
                         type: "SET_CURRENT_TRACKS",
-                        current_tracks: createAllTracks(data.items)
+                        current_tracks: tracks_object
+                    })
+                    dispatch({
+                        type: "SET_CURRENT_TRACK",
+                        current_track: tracks_object[0]
                     })
                 }
             });
@@ -35,7 +37,7 @@ function Player() {
     }, [spotify, current_playlist, dispatch])
 
     useEffect(() => {
-        console.log("useEffect Player swipo playlist")
+        // console.log("useEffect Player swipo playlist")
         dispatch({
             type: "SET_SWIPO_PLAYLIST",
             swipo_playlist: swipo_playlist
@@ -44,8 +46,7 @@ function Player() {
 
     //functions for React Tinder Card
     //if the card was swiped in a direction, either save it or do nothing
-    const swiped = function(direction, nameToDelete, songURI) {
-        console.log('Removing: ' + nameToDelete + " and direction swiped: " + direction);
+    const swiped = function(direction, songURI) {
         if (current_tracks !== null) {
             console.log("Swipo playlist id: " + swipo_playlist)
             // if (direction === "right" && swipo_playlist_id !== "") {
@@ -59,15 +60,18 @@ function Player() {
                 });
             }
         }
-        //To the track that was just played, increment the isSwiped prop. 
-        //Allows for automatic pausing
-        //Fix later, or find a completely new audio playing alternative
-        const tracksNew = [...current_tracks];
-        tracksNew.find(track => track.name === nameToDelete).isSwiped++;
-        dispatch({
-            type: "SET_CURRENT_TRACKS",
-            current_tracks: tracksNew
-        })
+        //Find the next track after the one just deleted. Make that the current track.
+        //That will allow that track's audio to be automatically played.
+        for (let i = 0; i < current_tracks.length; i++) {
+            if (current_tracks[i].songURI === songURI) {
+                // console.log("Found the current track!")
+                // console.log("songURI of song just deleted: ", songURI)
+                dispatch({
+                    type: "SET_CURRENT_TRACK",
+                    current_track: current_tracks[i + 1]
+                })
+            }
+        }
     }
 
     const outOfFrame = function(name) {
@@ -81,9 +85,9 @@ function Player() {
             <div className='cardContainer'>
                 {
                     current_tracks.map((track) => 
-                        <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.name, track.songURI)}
+                        <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.songURI)}
                             onCardLeftScreen={() => outOfFrame(track.name)} preventSwipe = {['up', 'down']}>
-                            <MainCard track={track} isSwiped={track.isSwiped}/>
+                            <MainCard track={track} isSwiped={track.isSwiped} songURI={track.songURI}/>
                         </TinderCard>
                     )
                 }
