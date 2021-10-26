@@ -15,10 +15,17 @@ $altBlack: #161616;
         // border: 1px solid green;
         height: 50px;
         width: 50px;
+        @media (max-width: 425px) {
+            height: 30px;
+            width: 30px;
+        }
         border-radius: 100px;
     }
     #swipo-logo {
         height: 60px;
+        @media (max-width: 425px) {
+            height: 30px;
+        }
         width: auto;
         margin: 0 20px;
         // border: 1px solid green;
@@ -27,5 +34,9 @@ $altBlack: #161616;
         // border: 1px solid green;
         width: 50px;
         height: 50px;
+        @media (max-width: 425px) {
+            height: 30px;
+            width: 30px;
+        }
     }
 }

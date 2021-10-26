@@ -170,6 +170,7 @@ $rhap_font-family: inherit !default;
   width: 26px;
   height: 26px;
   margin-right: 6px;
+  border: 1px solid green;
 }
 
 .rhap_main-controls {
@@ -314,7 +315,7 @@ $rhap_font-family: inherit !default;
         padding: 0;
         text-align: center;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 24px;
         margin-top: 5px;
     }
     #artist{
@@ -322,7 +323,7 @@ $rhap_font-family: inherit !default;
         padding: 0;
         text-align: center;
         font-weight: 300;
-        font-size: 13px;
+        font-size: 18px;
         opacity: 70%;
 
     }
