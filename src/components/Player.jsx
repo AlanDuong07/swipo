@@ -29,13 +29,12 @@ function Player() {
             });
         }
     }, [spotify, current_playlist, dispatch])
-
     //Function ran whenever a MainCard is swiped. If the card was swiped right, the song will be saved to
-    //a Swipo playlist.
+    //a Swipo playlist. If that playlist does not already exist, then create that playlist and try again.
     const swiped = function(direction, songURI) {
         if (current_tracks !== null) {
             if (direction === "right" && swipo_playlist !== null) {
-                console.log("hello")
+                // console.log("hello")
                 spotify.addTracksToPlaylist(swipo_playlist.id, [songURI], null, function (err, data) {
                     if (err) console.error(err);
                     else {

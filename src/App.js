@@ -11,8 +11,6 @@ const s = new SpotifyWebApi();
 
 function App() {
     const [{ token, user, spotify }, dispatch] = useStateValue();
-    //name of Swipo Playlist that songs will be saved to
-    const playlistName = "Swipo"
 
     //useEffect that runs whenever the token is changed. Usually runs right after the login button is clicked.
     //retrieves a token and sets various global states to be used throughout the app.
@@ -49,6 +47,9 @@ function App() {
     //useEffect that runs whenever a new user enters the system. It looks for an existing Swipo playlist, or 
     //creates a new one for the user.
     useEffect(() => {
+        //name of Swipo Playlist that songs will be saved to
+        const playlistName = "Swipo"
+
         let found_swipo_playlist = false
         if (user !== null) {
             spotify.getUserPlaylists(user.id ,null, function (err, data) {
@@ -62,19 +63,16 @@ function App() {
                             if (data.items[i].name === playlistName) {
                                 console.log("Found existing Swipo playlist")
                                 found_swipo_playlist = true
-                                // swipo_play = data.items[i].id
                                 dispatch({
                                     type: "SET_SWIPO_PLAYLIST",
                                     swipo_playlist: data.items[i]
                                 });
                             }
                         }
-                        // console.log("Swipo playlist in app.js: " + swipo_playlist)
                         if (!found_swipo_playlist) {
                             spotify.createPlaylist(user.id, {name: playlistName}, function (err, data) {
                                 if (err) console.error(err);
                                 else {
-                                    // swipo_play = data.id
                                     dispatch({
                                         type: "SET_SWIPO_PLAYLIST",
                                         swipo_playlist: data
