@@ -5,7 +5,7 @@ import TinderCard from 'react-tinder-card';
 
 let current_playlist_id = ""
 function Player() {
-    const [{ user, current_playlist, spotify, current_tracks, swipo_playlist }, dispatch] = useStateValue();
+    const [{ current_playlist, spotify, current_tracks, swipo_playlist }, dispatch] = useStateValue();
 
     useEffect(() => {
         console.log("In Current Playlist useEffect")
@@ -13,7 +13,7 @@ function Player() {
             type: "SET_CURRENT_PLAYLIST",
             current_playlist: current_playlist
         })
-    }, [current_playlist])
+    }, [current_playlist, dispatch])
 
 
     //functions on load and whenever the current playlist changes
@@ -32,7 +32,7 @@ function Player() {
                 }
             });
         }
-    }, [spotify, current_playlist])
+    }, [spotify, current_playlist, dispatch])
 
     useEffect(() => {
         console.log("useEffect Player swipo playlist")
@@ -40,7 +40,7 @@ function Player() {
             type: "SET_SWIPO_PLAYLIST",
             swipo_playlist: swipo_playlist
         })
-    }, [swipo_playlist])
+    }, [swipo_playlist, dispatch])
 
     //functions for React Tinder Card
     //if the card was swiped in a direction, either save it or do nothing

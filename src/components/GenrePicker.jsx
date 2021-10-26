@@ -7,7 +7,7 @@ let genre = ""
 // let s = null;
 function GenrePicker() {
     
-    const [{ current_playlist, spotify }, dispatch] = useStateValue()
+    const [{ spotify }, dispatch] = useStateValue()
     const history = useHistory();
     console.log("outside", spotify)
     useEffect(() => {

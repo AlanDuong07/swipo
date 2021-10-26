@@ -10,10 +10,9 @@ import LoginPage from "./components/LoginPage";
 const s = new SpotifyWebApi();
 
 function App() {
-    const [{ token, user, spotify, swipo_playlist }, dispatch] = useStateValue();
+    const [{ token, user, spotify }, dispatch] = useStateValue();
     //name of Swipo Playlist that songs will be saved to
     const playlistName = "Swipo"
-    let found_swipo_playlist = false
 
     useEffect(() => {
         // Set token
@@ -45,6 +44,7 @@ function App() {
     }, [token, dispatch]);
     useEffect(() => {
         //retrieve the user's already existing Swipo playlist or create a new one for them.
+        let found_swipo_playlist = false
         if (user !== null) {
             spotify.getUserPlaylists(user.id ,null, function (err, data) {
                 if (err) {
@@ -81,7 +81,7 @@ function App() {
                 }
             });
         }
-    }, [user]);
+    }, [user, dispatch, spotify]);
     return (
         <Router>
             <div className="App">

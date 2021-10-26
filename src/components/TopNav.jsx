@@ -1,20 +1,22 @@
 import React from 'react'
-import SwipoLogoTopNav from "../images/SwipoLogoTopNav.png";
-import cog from "../images/cog.png";
-import profile from "../images/profile.png";
-
-function TopNav(props) {
+import { Link } from 'react-router-dom'
+import SwipoLogoTopNav from "../images/SwipoLogoTopNav.png"
+import cog from "../images/cog.png"
+import profile from "../images/profile.png"
+import { useStateValue } from '../StateProvider'
+function TopNav() {
+    const [{ user }] = useStateValue()
     return (
         <div className="top-nav">
-            <a href="#" id="profile-link">
-                <img src={profile} alt="profile" id="profile"></img>
-            </a>
-            <a href="/" id="swipo-logo-link">
+            <Link to="/main/player">
+                <img src={user?.images[0].url} alt={profile} id="profile"></img>
+            </Link>
+            <Link to="/">
                 <img src={SwipoLogoTopNav} alt="SwipoLogo" id="swipo-logo"></img>
-            </a>
-            <a href="#" id="settings-link">
+            </Link>
+            <Link to="/main/player">
                 <img src={cog} id="settings" alt="settings"></img>
-            </a>
+            </Link>
         </div>
     )
 }
