@@ -7,16 +7,10 @@ let current_playlist_id = ""
 function Player() {
     const [{ current_playlist, spotify, current_tracks, swipo_playlist }, dispatch] = useStateValue();
 
-    useEffect(() => {
-        console.log("In Current Playlist useEffect")
-        dispatch({
-            type: "SET_CURRENT_PLAYLIST",
-            current_playlist: current_playlist
-        })
-    }, [current_playlist, dispatch])
-
-
-    //functions on load and whenever the current playlist changes
+    //useEffect that runs whenever the spotify web api obkect or the current_playlist changes.
+    //Will get the playlist tracks from the playlist and create a custom tracks object out of it,
+    //which we will map to individual MainCard components.
+    //Will set global state for current_tracks and current_track (a value used to determine whether audio should be played)
     useEffect(() => {
         if (spotify != null && current_playlist != null) {
             spotify.getPlaylistTracks(current_playlist.id, function (err, data) {
@@ -36,20 +30,10 @@ function Player() {
         }
     }, [spotify, current_playlist, dispatch])
 
-    useEffect(() => {
-        // console.log("useEffect Player swipo playlist")
-        dispatch({
-            type: "SET_SWIPO_PLAYLIST",
-            swipo_playlist: swipo_playlist
-        })
-    }, [swipo_playlist, dispatch])
-
-    //functions for React Tinder Card
-    //if the card was swiped in a direction, either save it or do nothing
+    //Function ran whenever a MainCard is swiped. If the card was swiped right, the song will be saved to
+    //a Swipo playlist.
     const swiped = function(direction, songURI) {
         if (current_tracks !== null) {
-            console.log("Swipo playlist id: " + swipo_playlist)
-            // if (direction === "right" && swipo_playlist_id !== "") {
             if (direction === "right" && swipo_playlist !== null) {
                 console.log("hello")
                 spotify.addTracksToPlaylist(swipo_playlist.id, [songURI], null, function (err, data) {
@@ -79,7 +63,7 @@ function Player() {
     }
 
 
-    //CONDITIONAL RENDERING OF THE PLAYER COMPONENT
+    //CONDITIONAL RENDERING OF THE PLAYER COMPONENT. Don't render the cards if there isn't a current_tracks object yet!
     if (current_tracks !== null && current_tracks !== undefined) {
         return (
             <div className='cardContainer'>

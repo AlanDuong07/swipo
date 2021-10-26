@@ -14,6 +14,8 @@ function App() {
     //name of Swipo Playlist that songs will be saved to
     const playlistName = "Swipo"
 
+    //useEffect that runs whenever the token is changed. Usually runs right after the login button is clicked.
+    //retrieves a token and sets various global states to be used throughout the app.
     useEffect(() => {
         // Set token
         const hash = getTokenFromResponse();
@@ -42,8 +44,11 @@ function App() {
         
         }
     }, [token, dispatch]);
+
+
+    //useEffect that runs whenever a new user enters the system. It looks for an existing Swipo playlist, or 
+    //creates a new one for the user.
     useEffect(() => {
-        //retrieve the user's already existing Swipo playlist or create a new one for them.
         let found_swipo_playlist = false
         if (user !== null) {
             spotify.getUserPlaylists(user.id ,null, function (err, data) {
@@ -82,6 +87,7 @@ function App() {
             });
         }
     }, [user, dispatch, spotify]);
+
     return (
         <Router>
             <div className="App">
