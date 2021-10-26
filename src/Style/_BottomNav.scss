@@ -10,45 +10,21 @@ $altBlack: #161616;
     width: 100vw;
     height: 70px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    // links in general
-    a{
-        display: flex;
-    }
 
 // profile
-    #playlist-link{
-        width: 33%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-    }
     #playlist {
         width: 25px;
         height: 20px;
     }
 // logo
-    #home-link{
-        width: 34%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        border-right: $pureWhite 1px solid;
-        border-left: $pureWhite 1px solid;
-    }
     #home {
         height: 30px;
         width: 30px;
     }
 
 // settings
-    #random-link{
-        width: 33%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-    }
     #random {
         width: 25px;
         height: 20px;

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import playlist from "../images/playlist.png";
 import home from "../images/home.png";
 import random from "../images/random.png";
@@ -7,15 +7,15 @@ import random from "../images/random.png";
 function BottomNav() {
     return (
         <div className="bottom-nav">
-            <a href="#" id="playlist-link">
-                <img src={playlist} alt="playlist" id="playlist"></img>
-            </a>
-            <a href="#" id="home-link">
-                <img src={home} alt="home" id="home"></img>
-            </a>
-            <a href="#" id="random-link">
-                <img src={random} alt="random" id="random"></img>
-            </a>
+            <Link to="/main/genrepicker/">
+                <img src={playlist} alt="Genre Picker" id="playlist"></img>
+            </Link>
+            <Link to="/main/player/">
+                <img src={home} alt="Swipo Player" id="home"></img>
+            </Link>
+            <Link to="/main/">
+                <img src={random} alt="Random" id="random"></img>
+            </Link>
         </div>
     )
 }

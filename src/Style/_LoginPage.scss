@@ -10,22 +10,29 @@ $altBlack: #161616;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-    #logo{
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    #swipo-logo{
-        margin-bottom: 65%;
+    background-color: black;
+    #swipo-logo {
         width: 400px;
         @media (max-width: 475px){
             width: 90%;
             }
+        margin-bottom: 20px;
     }
-    #login-button{
-        padding-top: 200px;
-        position: absolute;
+    #login-button {
+        padding: 15px 25px;
+        background-color: white;
+        border-radius: 20px;
+        &:hover {
+            background-color: $swipoGreen;
+            a {
+                color: white;
+            }
+        }
+        a {
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 800;
+            color: black;
+        }
     }
 }

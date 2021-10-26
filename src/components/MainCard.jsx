@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef} from 'react'
 
 import AudioPlayer from 'react-h5-audio-player';
 // import 'react-h5-audio-player/lib/styles.css';
@@ -12,7 +12,7 @@ function MainCard(props) {
         if (props.isSwiped >= 1){
             // end the song
             player.current.audio.current.pause();
-            console.log(props.track);
+            // console.log(props.track);
         }
     }, [props]);
 
