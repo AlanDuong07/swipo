@@ -37,7 +37,6 @@ function MainCard(props) {
                     showSkipControls={false}
                     hasDefaultKeyBindings={false}
                     loop={true}
-
                 />
             </div>
         </div>

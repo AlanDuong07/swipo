@@ -208,7 +208,7 @@ $rhap_font-family: inherit !default;
   font-size: 26px;
   width: 26px;
   height: 26px;
-  color: $altBlack;
+  color: $pureWhite;
   margin-right: 6px;
 }
 
@@ -239,7 +239,7 @@ $rhap_font-family: inherit !default;
   position: relative;
   width: 100%;
   height: 4px;
-  background: $altBlack;
+  background: $pureWhite;
   border-radius: 2px;
 }
 
@@ -254,7 +254,7 @@ $rhap_font-family: inherit !default;
   opacity: 0.9;
   border-radius: 50px;
   cursor: pointer;
-  background-color: $altBlack;
+  background-color: $pureWhite;
 
   &:hover {
     opacity: .9;
@@ -266,7 +266,7 @@ $rhap_font-family: inherit !default;
   position: absolute;
   z-index: 2;
   border-radius: 2px;
-  background-color: $altBlack;
+  background-color: $pureWhite;
 }
 
 /* Utils */
@@ -292,9 +292,17 @@ $rhap_font-family: inherit !default;
 }
 .mainCard{
     margin: 30px auto 0px auto;
+    @media (max-width: 425px) {
+      margin: 100px auto 0px auto;
+    }
     color: white;
-    width: fit-content;
-    max-width: 375px;
+    width: 375px;
+    @media (max-width: 425px) {
+      width: 90%;
+    }
+    @media (max-height: 650px) {
+      height: 90%;
+    }
     border: 2px solid $swipoGreen;
     border-radius: 20px;
     display: flex;
@@ -302,11 +310,13 @@ $rhap_font-family: inherit !default;
     align-items: center;
     overflow: hidden;
     margin-bottom: 500px;
-
-
     #albumCover{
         height: 290px;
         width: 290px;
+        @media (max-width: 425px) {
+          height: 220px;
+          width: 220px;
+        }
         align-items: center;
         justify-content: center;
         margin-top: 30px;

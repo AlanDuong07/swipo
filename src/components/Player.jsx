@@ -116,7 +116,7 @@ function getPlaylistTrackInfo(playlistTracks, songCounter) {
         console.log("playlistTracks is undefined or 0, ");
         return [];
     }
-    console.log("playlistTracks", playlistTracks)
+    // console.log("playlistTracks", playlistTracks)
     let properties = playlistTracks[songCounter].track;
     const songName = properties.name;
     let artists = "";
