@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router-dom";
 import magglass from "../images/magglass.png";
@@ -6,37 +6,46 @@ import magglass from "../images/magglass.png";
 let genre = ""
 // let s = null;
 function GenrePicker() {
-    
-    const [{ spotify }, dispatch] = useStateValue()
+    const [{ spotify, playlist_type }, dispatch] = useStateValue()
     const history = useHistory();
-    console.log("outside", spotify)
-    useEffect(() => {
-        console.log("In genrePicker useEffect", spotify)
-        dispatch({
-            type: "SET_SPOTIFY",
-            spotify: spotify
-        })
-    }, [spotify, dispatch])
-    const routeToMain = function(){
+
+    const searchAndRouteToMain = function(){
         let query = genre.split(' ').join('+')
         let playlist;
         console.log("Currently searching and routing to main...")
         console.log("Spotify object currently: " + spotify)
-        if (spotify !== null) {
-            spotify.searchPlaylists(query, null, (err, data) => {
+        if (spotify !== null && playlist_type !== null) {
+            spotify.search(query, ["playlist", "album"], (err, data) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    if (data.playlists.items.length === 0) {
-                        console.log("No playlists found!")
+                    console.log("Finished searching! Here's the data: ", data)
+                    if (playlist_type === "playlist") {
+                        if (data.playlists.items.length === 0) {
+                            console.log("No playlists found!")
+                        } else {
+                            playlist = data.playlists.items[0]
+                            console.log("playlistType is playlist. Putting in this playlist: ", playlist)
+                            dispatch({
+                                type: "SET_CURRENT_PLAYLIST",
+                                current_playlist: playlist
+                            })
+                            let path = "/main/player/"
+                            history.push(path)
+                        }
                     } else {
-                        playlist = data.playlists.items[0]
-                        dispatch({
-                            type: "SET_CURRENT_PLAYLIST",
-                            current_playlist: playlist
-                        })
-                        let path = "/main/player/"
-                        history.push(path)
+                        if (data.albums.items.length === 0) {
+                            console.log("No albums found!")
+                        } else {
+                            playlist = data.albums.items[0]
+                            console.log("playlistType is album. Putting in this album: ", playlist)
+                            dispatch({
+                                type: "SET_CURRENT_PLAYLIST",
+                                current_playlist: playlist
+                            })
+                            let path = "/main/player/"
+                            history.push(path)
+                        }
                     }
                 }
             })
@@ -44,17 +53,33 @@ function GenrePicker() {
             console.log("Rip, Spotify object is null: ", spotify)
         }
     }
-    const handleChange = (event) => {
+    const handleQueryChange = (event) => {
         genre = event.target.value;
+    }
+    const handlePlaylistTypeChange = function(playlistTypeString) {
+        dispatch({
+            type: "SET_PLAYLIST_TYPE",
+            playlist_type: playlistTypeString
+        })
     }
   
     return (
         <div className="PickGenrePage">
             <div id="search-bar">
-                <input id="input" type="text" placeholder="Search for a genre..." onChange={handleChange}/>
-                <button id="button" type="submit" onClick={routeToMain}>
+                <input id="input" type="text" placeholder="Search for a genre..." onChange={handleQueryChange}/>
+                <button id="button" type="submit" onClick={searchAndRouteToMain}>
                         <img src={magglass} alt="Search Button"></img>
                 </button>
+            </div>
+            <div id="boxPlaylistTypeSelector">
+                <label>
+                    <p> Playlist </p>
+                    <input type="radio" checked={playlist_type === "playlist"} onChange={() => handlePlaylistTypeChange("playlist")}/>
+                </label>
+                <label>
+                    <p> Album </p>
+                    <input type="radio" checked={playlist_type === "album"} onChange={() => handlePlaylistTypeChange("album")}/>
+                </label>
             </div>
         </div>
     )

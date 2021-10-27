@@ -3,6 +3,7 @@ export const initialState = {
     token: null,
     spotify: null,
     current_playlist: null,
+    playlist_type: null,
     current_tracks: null,
     current_track: null,
     swipo_playlist: null
@@ -28,22 +29,31 @@ export const initialState = {
             ...state,
             spotify: action.spotify,
             };
-    
+
         case "SET_CURRENT_PLAYLIST":
             return {
             ...state,
             current_playlist: action.current_playlist,
             };
+
+        case "SET_PLAYLIST_TYPE":
+            return {
+            ...state,
+            playlist_type: action.playlist_type,
+            };
+
         case "SET_CURRENT_TRACKS":
             return {
             ...state,
             current_tracks: action.current_tracks,
             };
+
         case "SET_CURRENT_TRACK":
             return {
             ...state,
             current_track: action.current_track,
             };
+
         case "SET_SWIPO_PLAYLIST":
             console.log("setting swipo playlist", action);
             return {

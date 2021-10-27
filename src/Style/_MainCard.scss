@@ -293,6 +293,7 @@ $rhap_font-family: inherit !default;
 .mainCard{
     margin: 30px auto 0px auto;
     color: white;
+    width: fit-content;
     max-width: 375px;
     border: 2px solid $swipoGreen;
     border-radius: 20px;
