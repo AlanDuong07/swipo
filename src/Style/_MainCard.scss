@@ -192,7 +192,7 @@ $rhap_font-family: inherit !default;
   font-size: 40px;
   width: 40px;
   height: 40px;
-  
+  cursor: pointer;
 }
 
 .rhap_volume-controls {
@@ -280,14 +280,17 @@ $rhap_font-family: inherit !default;
   &:hover {
     opacity: .9;
     transition-duration: .2s;
+    cursor: pointer;
   }
 
   &:active {
     opacity: .95;
+    cursor: pointer;
   }
 
   &:focus:not(:focus-visible) {
     outline: 0;
+    cursor: pointer;
   }
 }
 .mainCard{

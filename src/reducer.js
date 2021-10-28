@@ -3,7 +3,7 @@ export const initialState = {
     token: null,
     spotify: null,
     current_playlist: null,
-    playlist_type: null,
+    playlist_type: 'playlist',
     current_tracks: null,
     current_track: null,
     swipo_playlist: null

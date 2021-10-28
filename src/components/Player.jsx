@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react'
+import { useHistory } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
 import MainCard from './MainCard'
 import TinderCard from 'react-tinder-card';
 
 function Player() {
-    const [{ current_playlist, playlist_type, spotify, current_tracks, swipo_playlist }, dispatch] = useStateValue();
-
+    const [{ current_playlist, playlist_type, spotify, current_tracks, current_track, swipo_playlist }, dispatch] = useStateValue();
+    const history = useHistory()
     //useEffect that runs whenever the spotify web api obkect or the current_playlist changes.
     //Will get the playlist tracks from the playlist and create a custom tracks object out of it,
     //which we will map to individual MainCard components.
@@ -61,19 +62,42 @@ function Player() {
             }
         }
         //Find the next track after the one just deleted. Make that the current track.
-        //That will allow that track's audio to be automatically played.
+        //That will allow that track's audio to be automatically played. 
+        //If the track that was just deleted was the last track, then current_track will be set to undefined.
         for (let i = 0; i < current_tracks.length; i++) {
             if (current_tracks[i].songURI === songURI) {
                 // console.log("Found the current track!")
                 // console.log("songURI of song just deleted: ", songURI)
-                dispatch({
-                    type: "SET_CURRENT_TRACK",
-                    current_track: current_tracks[i + 1]
-                })
+                if (i === (current_tracks.length - 1)) {
+                    console.log("Just swiped the last song! Setting current_track to null.")
+                    dispatch({
+                        type: "SET_CURRENT_TRACK",
+                        current_track: null
+                    })
+                    dispatch({
+                        type: "SET_CURRENT_TRACKS",
+                        current_tracks: null
+                    })
+                    dispatch({
+                        type: "SET_CURRENT_PLAYLIST",
+                        current_playlist: null
+                    })
+                } else {
+                    dispatch({
+                        type: "SET_CURRENT_TRACK",
+                        current_track: current_tracks[i + 1]
+                    })
+                }
             }
         }
     }
 
+    //useEffect that checks if the playlist has been completely swiped on. If so, redirect to the genrepage to continue discovering music.
+    useEffect(() => {
+        if (current_track === null && current_tracks === null && current_playlist === null) {
+            history.push("/main/genrepicker")
+        }
+    }, [current_track, current_playlist, current_tracks, dispatch, history])
     const outOfFrame = function(name) {
         console.log(name + ' left the screen!')
     }
@@ -85,7 +109,7 @@ function Player() {
             <div className='cardContainer'>
                 {
                     current_tracks.map((track) => 
-                        <TinderCard className='swipe' key={track.name} onSwipe={(dir) => swiped(dir, track.songURI)}
+                        <TinderCard className='swipe' key={track.songURI} onSwipe={(dir) => swiped(dir, track.songURI)}
                             onCardLeftScreen={() => outOfFrame(track.name)} preventSwipe = {['up', 'down']}>
                             <MainCard track={track} isSwiped={track.isSwiped} songURI={track.songURI}/>
                         </TinderCard>
@@ -96,7 +120,7 @@ function Player() {
     } else {
         return (
             <div className='cardContainer'>
-
+                
             </div>
         )
     }
@@ -110,48 +134,90 @@ function Player() {
 
 
 //Helper function for createAllTracks. Specifically for playlists. Get's a single track at the songCounter index in playlistTracks.
-//and creates the custom track object.
+//and creates the custom track object, as well as a boolean as to whether this track is a valid, playable track. returns these two
+//items in an array.
 function getPlaylistTrackInfo(playlistTracks, songCounter) {
+    let trackIsValid = true
+    //if the playlistTracks input is empty, don't continue.
+    if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
+        console.log("playlistTracks is undefined or 0, ");
+        return [];
+    }
+    // console.log("playlistTracks in getPlaylistTrackInfo", playlistTracks)
+
+    let songName = null
+    let artists = ""
+    let albumImageUrl = null
+    let musicPreviewUrl = null
+    let songURI = null
+    //check if this current track is a valid track. If it is, 
+    //it will replace the default fields for the track with valid data.
+    let properties = playlistTracks[songCounter].track;
+    if (properties !== undefined && properties !== null) {
+        songName = properties.name;
+        for (let i = 0; i < properties.artists.length; i++) {
+            artists += properties.artists[i].name;
+            if (i !== properties.artists.length - 1) artists += ", ";
+        }
+
+        albumImageUrl = properties.album.images[0].url;
+        musicPreviewUrl = properties.preview_url;
+        songURI = properties.uri;
+    } 
+
+    //check if any of the fields are still empty. If it is, then this track is invalid,
+    //and shouldn't be played. Return false as a second return value, to indicate that.
+    //later, possibly allow some of these to be empty, if it isn't integral to discovering the song.
+    if (songName === null || artists === "" || albumImageUrl === null || musicPreviewUrl === null || songURI === null) {
+        trackIsValid = false
+        return [{}, trackIsValid]
+    }
+
+
+    //the track is valid! return it
+    return [{name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI}, trackIsValid];
+}
+
+//Helper function for createAllTracks. Specifically for albums, so a imageURL is needed. 
+//Get's a single track at the songCounter index in playlistTracks.
+//and creates the custom track object, as well as a boolean as to whether this track is a valid, playable track. returns these two
+//items in an array.
+function getAlbumTrackInfo(playlistTracks, songCounter, imageURL) {
+    let trackIsValid = true
+    // console.log("imageURL in getAlbumTrackInfo", imageURL)
     if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
         console.log("playlistTracks is undefined or 0, ");
         return [];
     }
     // console.log("playlistTracks", playlistTracks)
-    let properties = playlistTracks[songCounter].track;
-    const songName = properties.name;
-    let artists = "";
-    for (let i = 0; i < properties.artists.length; i++) {
-        artists += properties.artists[i].name;
-        if (i !== properties.artists.length - 1) artists += ", ";
-    }
 
-    const albumImageUrl = properties.album.images[0].url;
-    const musicPreviewUrl = properties.preview_url;
-    const songURI = properties.uri;
-    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI};
-}
-
-//Helper function for createAllTracks. Specifically for albums, as an image url is needed
-//as input.  Get's a single track at the songCounter index in playlistTracks and creates the custom track object.
-function getAlbumTrackInfo(playlistTracks, songCounter, imageURL) {
-    console.log("imageURL in getAlbumTrackInfo", imageURL)
-    if (playlistTracks === undefined || playlistTracks === null || playlistTracks.length === 0) {
-        console.log("playlistTracks is undefined or 0, ");
-        return [];
-    }
-    console.log("playlistTracks", playlistTracks)
+    let songName = null
+    let artists = ""
+    let albumImageUrl = imageURL
+    let musicPreviewUrl = null
+    let songURI = null
+    //check if this current track is a valid track. If it is, 
+    //it will replace the default fields for the track with valid data.
     let properties = playlistTracks[songCounter];
-    const songName = properties.name;
-    let artists = "";
-    for (let i = 0; i < properties.artists.length; i++) {
-        artists += properties.artists[i].name;
-        if (i !== properties.artists.length - 1) artists += ", ";
+    if (properties !== undefined && properties !== null) {
+        songName = properties.name;
+        for (let i = 0; i < properties.artists.length; i++) {
+            artists += properties.artists[i].name;
+            if (i !== properties.artists.length - 1) artists += ", ";
+        }
+        musicPreviewUrl = properties.preview_url;
+        songURI = properties.uri;
     }
 
-    const albumImageUrl = imageURL
-    const musicPreviewUrl = properties.preview_url;
-    const songURI = properties.uri;
-    return {name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI};
+    //check if any of the fields are still empty. If it is, then this track is invalid,
+    //and shouldn't be played. Return false as a second return value, to indicate that.
+    if (songName === null || artists === "" ||  musicPreviewUrl === null || songURI === null) {
+        trackIsValid = false
+        return [{}, trackIsValid]
+    }
+
+    //the track is valid! return it
+    return [{name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI}, trackIsValid];
 }
 
 
@@ -164,11 +230,15 @@ function createAllPlaylistTracks(playlistTracks) {
         console.log("createAllPlaylistTracks terminated because playLists tracks is empty!");
         return;
     }
+
+    //go through all of the playlist tracks and create a track object out of
+    //each of them, adding them to our tracks list if they are valid.
     for (let i = 0; i < playlistTracks.length; i++) {
-        let cur = null
-        cur = getPlaylistTrackInfo(playlistTracks, i)
-        if (cur.musicPreviewUrl != null) {
-            tracks.push(cur);
+        let arrayCurTrack = getPlaylistTrackInfo(playlistTracks, i)
+        let curTrack = arrayCurTrack[0]
+        let curTrackIsValid = arrayCurTrack[1]
+        if (curTrackIsValid) {
+            tracks.push(curTrack);
         }
     }
     console.log("Tracks object after creation:", tracks);
@@ -184,10 +254,11 @@ function createAllAlbumTracks(playlistTracks, imageURL) {
         return;
     }
     for (let i = 0; i < playlistTracks.length; i++) {
-        let cur = null
-        cur = getAlbumTrackInfo(playlistTracks, i, imageURL)
-        if (cur.musicPreviewUrl != null) {
-            tracks.push(cur);
+        let arrayCurTrack = getAlbumTrackInfo(playlistTracks, i, imageURL)
+        let curTrack = arrayCurTrack[0]
+        let curTrackIsValid = arrayCurTrack[1]
+        if (curTrackIsValid) {
+            tracks.push(curTrack);
         }
     }
     console.log("Tracks object after creation:", tracks);

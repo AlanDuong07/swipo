@@ -10,7 +10,8 @@ function MainCard(props) {
     //useEffect that checks whenever the current_track has changed, and whether the current_track is this individual MainCard.
     //if it is, then play the audio for this individual MainCard. If not, then don't play it.
     useEffect(() => {
-        if (current_track !== null) {
+        if (current_track !== null && current_track !== undefined) {
+            // console.log("in useEffect for mainCard, current_track: ", current_track)
             // console.log("In useEffect for mainCard, current_track != null!. current_track.songURI: ", current_track.songURI)
             // console.log("Current card's songURI: ", props.songURI)
             if (current_track.songURI === props.songURI) {
@@ -18,6 +19,8 @@ function MainCard(props) {
             } else {
                 player.current.audio.current.pause()
             }
+        } else {
+            player.current.audio.current.pause()
         }
     }, [current_track, playing, props])
 
@@ -37,6 +40,7 @@ function MainCard(props) {
                     showSkipControls={false}
                     hasDefaultKeyBindings={false}
                     loop={true}
+                    volume={0.1}
                 />
             </div>
         </div>
