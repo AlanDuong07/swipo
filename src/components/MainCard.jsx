@@ -1,20 +1,21 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useStateValue } from '../StateProvider'
 import AudioPlayer from 'react-h5-audio-player'
 // import 'react-h5-audio-player/lib/styles.css';
 
 function MainCard(props) {
-    const [{ current_track, playing }] = useStateValue()
+    const [{ current_track }] = useStateValue()
+    const player = useRef()
 
-    const player = useRef();
-    //useEffect that checks whenever the current_track has changed, and whether the current_track is this individual MainCard.
-    //if it is, then play the audio for this individual MainCard. If not, then don't play it.
+    // useEffect that checks whenever the current_track has changed, and whether the current_track is this individual MainCard.
+    // if it is, then play the audio for this individual MainCard. If not, then don't play it.
     useEffect(() => {
         if (current_track !== null && current_track !== undefined) {
             // console.log("in useEffect for mainCard, current_track: ", current_track)
             // console.log("In useEffect for mainCard, current_track != null!. current_track.songURI: ", current_track.songURI)
             // console.log("Current card's songURI: ", props.songURI)
             if (current_track.songURI === props.songURI) {
+                console.log("Just set the song to play!")
                 player.current.audio.current.play()
             } else {
                 player.current.audio.current.pause()
@@ -22,8 +23,33 @@ function MainCard(props) {
         } else {
             player.current.audio.current.pause()
         }
-    }, [current_track, playing, props])
+    }, [current_track, props])
 
+
+    //useEffect that runs whenever the player is changed. It retrieves this specific playPauseButton and adds a touchend
+    //listener that will toggle play/pause based on the current state of paused. 
+    useEffect(() => {
+        if (document.getElementById(`playPauseButton${props.songURI}`)) {
+            document.getElementById(`playPauseButton${props.songURI}`).addEventListener("touchend", function() {
+                console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.songURI}`) )
+                if (player.current.audio.current.paused) {
+                    player.current.audio.current.play()
+                } 
+                else {
+                    player.current.audio.current.pause()
+                }
+            })
+            document.getElementById(`playPauseButton${props.songURI}`).addEventListener("click", function() {
+                console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.songURI}`) )
+                if (player.current.audio.current.paused) {
+                    player.current.audio.current.play()
+                } 
+                else {
+                    player.current.audio.current.pause()
+                }
+            })
+        }
+    }, [player])
     return (
         <div className="mainCard">
             <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
@@ -34,14 +60,16 @@ function MainCard(props) {
                     className="rhap_container"
                     autoPlay={false}
                     src={props.track.musicPreviewUrl}
-                    onPlay={e => console.log("onPlay")}
                     ref={player}
                     showJumpControls={false}
                     showSkipControls={false}
                     hasDefaultKeyBindings={false}
                     loop={true}
-                    volume={0.1}
+                    volume={0.2}
                 />
+            </div>
+            <div id="audioControlsBox">
+                <button className="playPauseButton" id={"playPauseButton" + props.songURI}>Play/Pause</button>
             </div>
         </div>
     )

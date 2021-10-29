@@ -101,7 +101,8 @@ function Player() {
     const outOfFrame = function(name) {
         console.log(name + ' left the screen!')
     }
-
+    
+    
 
     //CONDITIONAL RENDERING OF THE PLAYER COMPONENT. Don't render the cards if there isn't a current_tracks object yet!
     if (current_tracks !== null && current_tracks !== undefined) {
