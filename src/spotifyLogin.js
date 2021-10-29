@@ -3,7 +3,7 @@ export const authEndpoint = "https://accounts.spotify.com/authorize";
 
 const clientId = "ba8410471b294344b293d5d6270ec54f";
 // const redirectUri = "http://localhost:3000/main/genrepicker/";
-const redirectUri = "https://swipo.onrender.com/main/genrepicker/";
+const redirectUri = "https://swipo.onrender.com/";
 const scopes = [
   "user-read-private",
   "user-read-email",
