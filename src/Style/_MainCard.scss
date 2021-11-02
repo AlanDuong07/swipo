@@ -16,28 +16,55 @@ $rhap_time-color: #333 !default;
 $rhap_font-family: inherit !default;
 
 .mainCard{
-  @media (max-width: 425px) {
-    margin: 30px auto 500px auto;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1000px;
+  //phone + tablet needs smaller margin-top
+  
+  @media (min-height: 600px) {
+    margin-top: 60px;
   }
-  @media (max-height: 768px) {
-    margin: 30px auto 500px auto;
+  @media (min-height: 650px) {
+    margin-top: 70px;
   }
-  @media (min-height: 768px) {
-    margin: 100px auto 500px auto;
+  @media (min-height: 700px) {
+    margin-top: 100px;
   }
-  @media (min-height: 1024px) {
-    margin: 250px auto 500px auto;
+  @media (min-height: 750px) {
+    margin-top: 110px;
   }
-  @media (min-height: 1300px) {
-    margin: 300px auto 1000px auto;
+  @media (min-height: 800px) {
+    margin-top: 130px;
+  }
+  @media (min-height: 850px) {
+    margin-top: 160px;
+  }
+  @media (min-height: 900px) {
+    margin-top: 190px;
+  }
+  @media (min-height: 950px) {
+    margin-top: 210px;
+  }
+  @media (min-height: 1000px) {
+    margin-top: 220px;
+  }
+  @media (min-height: 1050px) {
+    margin-top: 250px;
+  }
+  @media (min-height: 1100px) {
+    margin-top: 310px;
+  }
+  @media (min-height: 1150px) {
+    margin-top: 340px;
+  }
+  @media (min-height: 1200px) {
+    margin-top: 370px;
   }
   color: white;
   width: 375px;
   @media (max-width: 425px) {
-    width: 90%;
-  }
-  @media (max-height: 650px) {
-    height: 90%;
+    width: 90vw;
   }
   border: 2px solid $swipoGreen;
   border-radius: 20px;
@@ -81,19 +108,43 @@ $rhap_font-family: inherit !default;
     height: 80%;
     top: 0;
   }
-  .playPauseButton {
-    width: 100px;
-    height: 50px;
-    background-color: $swipoGreen;
-    border: none;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    color: white;
-    font-weight: 600;
-    font-size: 15px;
-    &:hover {
-      background-color: rgba($swipoGreen, 0.7);
-      color: rgba(white, 0.7);
+  #controlsBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // border: 1px solid red;
+    width: 100%;
+    .invisible {
+      visibility: hidden;
+      width: 50px;
+      height: 50px;
+      border: 1px solid yellow;
+    }
+    .playPauseButton {
+      width: 100px;
+      height: 50px;
+      background-color: $swipoGreen;
+      border: none;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      &:hover {
+        background-color: rgba($swipoGreen, 0.7);
+        color: rgba(white, 0.7);
+      }
+    }
+    #openSpotifyButton{
+      margin-right: 20px;
+      img {
+        width: 40px;
+        height: 40px;
+        opacity: 0.8;
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 }

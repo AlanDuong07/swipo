@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useStateValue } from '../StateProvider'
 import AudioPlayer from 'react-h5-audio-player'
 // import 'react-h5-audio-player/lib/styles.css';
+import SpotifySmallLogo from '../images/SpotifySmallLogo.png'
 
 function MainCard(props) {
     const [{ current_track }] = useStateValue()
@@ -68,8 +69,10 @@ function MainCard(props) {
                     volume={0.2}
                 />
             </div>
-            <div id="audioControlsBox">
+            <div id="controlsBox">
+                <div className="invisible">Invisible Flex Item</div>
                 <button className="playPauseButton" id={"playPauseButton" + props.songURI}>Play/Pause</button>
+                <a id="openSpotifyButton" href={props.track.openSpotifyUrl} target="_blank" rel="noreferrer" alt="Spotify Link"><img src={SpotifySmallLogo}/></a>
             </div>
         </div>
     )

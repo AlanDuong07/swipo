@@ -171,13 +171,14 @@ function getPlaylistTrackInfo(playlistTracks, songCounter) {
         console.log("playlistTracks is undefined or 0, ");
         return [];
     }
-    // console.log("playlistTracks in getPlaylistTrackInfo", playlistTracks)
+    console.log("playlistTracks in getPlaylistTrackInfo", playlistTracks)
 
     let songName = null
     let artists = ""
     let albumImageUrl = null
     let musicPreviewUrl = null
     let songURI = null
+    let openSpotifyUrl = null
     //check if this current track is a valid track. If it is, 
     //it will replace the default fields for the track with valid data.
     let properties = playlistTracks[songCounter].track;
@@ -191,19 +192,20 @@ function getPlaylistTrackInfo(playlistTracks, songCounter) {
         albumImageUrl = properties.album.images[0].url;
         musicPreviewUrl = properties.preview_url;
         songURI = properties.uri;
+        openSpotifyUrl = properties.external_urls.spotify
     } 
 
     //check if any of the fields are still empty. If it is, then this track is invalid,
     //and shouldn't be played. Return false as a second return value, to indicate that.
     //later, possibly allow some of these to be empty, if it isn't integral to discovering the song.
-    if (songName === null || artists === "" || albumImageUrl === null || musicPreviewUrl === null || songURI === null) {
+    if (songName === null || artists === "" || albumImageUrl === null || musicPreviewUrl === null || songURI === null || openSpotifyUrl === null) {
         trackIsValid = false
         return [{}, trackIsValid]
     }
 
 
     //the track is valid! return it
-    return [{name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI}, trackIsValid];
+    return [{name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI, openSpotifyUrl: openSpotifyUrl}, trackIsValid];
 }
 
 //Helper function for createAllTracks. Specifically for albums, so a imageURL is needed. 
@@ -224,28 +226,30 @@ function getAlbumTrackInfo(playlistTracks, songCounter, imageURL) {
     let albumImageUrl = imageURL
     let musicPreviewUrl = null
     let songURI = null
+    let openSpotifyUrl = null
     //check if this current track is a valid track. If it is, 
     //it will replace the default fields for the track with valid data.
-    let properties = playlistTracks[songCounter];
+    let properties = playlistTracks[songCounter]
     if (properties !== undefined && properties !== null) {
-        songName = properties.name;
+        songName = properties.name
         for (let i = 0; i < properties.artists.length; i++) {
-            artists += properties.artists[i].name;
-            if (i !== properties.artists.length - 1) artists += ", ";
+            artists += properties.artists[i].name
+            if (i !== properties.artists.length - 1) artists += ", "
         }
-        musicPreviewUrl = properties.preview_url;
-        songURI = properties.uri;
+        musicPreviewUrl = properties.preview_url
+        songURI = properties.uri
+        openSpotifyUrl = properties.external_urls.spotify
     }
 
     //check if any of the fields are still empty. If it is, then this track is invalid,
     //and shouldn't be played. Return false as a second return value, to indicate that.
-    if (songName === null || artists === "" ||  musicPreviewUrl === null || songURI === null) {
+    if (songName === null || artists === "" ||  musicPreviewUrl === null || songURI === null || openSpotifyUrl === null) {
         trackIsValid = false
         return [{}, trackIsValid]
     }
 
     //the track is valid! return it
-    return [{name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI}, trackIsValid];
+    return [{name: songName, artists: artists, albumImageUrl: albumImageUrl, musicPreviewUrl: musicPreviewUrl, songURI: songURI, openSpotifyUrl: openSpotifyUrl}, trackIsValid];
 }
 
 
