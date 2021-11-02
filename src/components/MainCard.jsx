@@ -49,7 +49,7 @@ function MainCard(props) {
                 }
             })
         }
-    }, [player])
+    }, [player, props.songURI])
     return (
         <div className="mainCard">
             <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
