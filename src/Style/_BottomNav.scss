@@ -2,31 +2,33 @@ $swipoGreen: #10D48E;
 $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
 $altBlack: #161616;
- 
+$offWhite: #F0F0F0;
+
  .bottom-nav {
-    background-color: $altBlack;
+    background-color: $pureWhite;
     position: fixed;
-    bottom: 0;
-    width: 100vw;
+    bottom: 50px;
+    width: 30vw;
+    min-width: 300px;
     height: 70px;
+    border-radius: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-// profile
+    @media (max-width: 425px) {
+        bottom: 10px;
+    }
     #playlist {
         width: 25px;
-        height: 20px;
+        margin-top: 5px;
+        // border: 1px solid green;
     }
-// logo
     #home {
         height: 30px;
-        width: 30px;
     }
-
-// settings
     #random {
         width: 25px;
-        height: 20px;
+        margin-top: 3px;
+        // border: 1px solid green;
     }
 }

@@ -1,13 +1,11 @@
 import React from "react"
 import { accessUrl } from "../spotifyLogin";
-import SwipoLogoLoginNew from "../images/SwipoLogoLoginNew.png";
+import SwipoLogoLoginOffWhite from "../images/SwipoLogoLoginOffWhite.png";
 
 function LoginPage() {
     return (
         <div className="login-page">
-            <div id="logo">
-                <img src={SwipoLogoLoginNew} alt="SwipoLogo" id="swipo-logo"></img>
-            </div>
+            <img src={SwipoLogoLoginOffWhite} alt="SwipoLogo" id="swipo-logo"></img>
             <div id="login-button">
                 <a href={accessUrl}>Login with Spotify</a>
             </div>

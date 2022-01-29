@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateProvider'
 import AudioPlayer from 'react-h5-audio-player'
 // import 'react-h5-audio-player/lib/styles.css';
@@ -52,29 +53,38 @@ function MainCard(props) {
         }
     }, [player, props.songURI])
     return (
-        <div className="mainCard">
-            <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
-            <h1 id="songName">{props.track.name}</h1>
-            <h2 id="artist">{props.track.artists}</h2>
-            <div id="audio">
-                <AudioPlayer
-                    className="rhap_container"
-                    autoPlay={false}
-                    src={props.track.musicPreviewUrl}
-                    ref={player}
-                    showJumpControls={false}
-                    showSkipControls={false}
-                    hasDefaultKeyBindings={false}
-                    loop={true}
-                    volume={0.2}
-                />
+        <div className="mainCardWrapper">
+            <div className="mainCard borderFaint">
+                <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
+                <div id="songName">
+                    <h1>{props.track.name}</h1>
+                </div>
+                <div id="artist">
+                    <h2>{props.track.artists}</h2>
+                </div>
+                <div id="audio">
+                    <AudioPlayer
+                        className="rhap_container"
+                        autoPlay={false}
+                        src={props.track.musicPreviewUrl}
+                        ref={player}
+                        showJumpControls={false}
+                        showSkipControls={false}
+                        hasDefaultKeyBindings={false}
+                        loop={true}
+                        volume={0.2}
+                    />
+                </div>
             </div>
             <div id="controlsBox">
                 <div className="invisible">Invisible Flex Item</div>
-                <button className="playPauseButton" id={"playPauseButton" + props.songURI}>Play/Pause</button>
-                <a id="openSpotifyButton" href={props.track.openSpotifyUrl} target="_blank" rel="noreferrer" alt="Spotify Link"><img src={SpotifySmallLogo}/></a>
+                <button className="playPauseButton borderFaint" id={"playPauseButton" + props.songURI}>Play/Pause</button>
+                <a id="openSpotifyButton" href={props.track.openSpotifyUrl} target="_blank" rel="noreferrer" alt="Spotify Link">
+                    <img src={SpotifySmallLogo}/>
+                </a>
             </div>
         </div>
+        
     )
 
 }

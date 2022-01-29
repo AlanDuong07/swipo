@@ -2,6 +2,7 @@ $swipoGreen: #10D48E;
 $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
 $altBlack: #161616;
+$smokeBlack: #434F4A;
 
 $rhap_theme-color: $pureWhite;   // 
 $rhap_background-color: $altBlack; // 
@@ -15,104 +16,17 @@ $rhap_bar-color: #dddddd !default;
 $rhap_time-color: #333 !default;
 $rhap_font-family: inherit !default;
 
-.mainCard{
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1000px;
-  //phone + tablet needs smaller margin-top
-  
-  @media (min-height: 600px) {
-    margin-top: 60px;
-  }
-  @media (min-height: 650px) {
-    margin-top: 70px;
-  }
-  @media (min-height: 700px) {
-    margin-top: 100px;
-  }
-  @media (min-height: 750px) {
-    margin-top: 110px;
-  }
-  @media (min-height: 800px) {
-    margin-top: 130px;
-  }
-  @media (min-height: 850px) {
-    margin-top: 160px;
-  }
-  @media (min-height: 900px) {
-    margin-top: 190px;
-  }
-  @media (min-height: 950px) {
-    margin-top: 210px;
-  }
-  @media (min-height: 1000px) {
-    margin-top: 220px;
-  }
-  @media (min-height: 1050px) {
-    margin-top: 250px;
-  }
-  @media (min-height: 1100px) {
-    margin-top: 310px;
-  }
-  @media (min-height: 1150px) {
-    margin-top: 340px;
-  }
-  @media (min-height: 1200px) {
-    margin-top: 370px;
-  }
-  color: white;
-  width: 375px;
-  @media (max-width: 425px) {
-    width: 90vw;
-  }
-  border: 2px solid $swipoGreen;
-  border-radius: 20px;
+
+.mainCardWrapper {
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  align-items: center;
-  overflow: hidden;
-  margin-bottom: 500px;
-  #albumCover{
-    height: 290px;
-    width: 290px;
-    @media (max-width: 425px) {
-      height: 220px;
-      width: 220px;
-    }
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-  }
-  #songName{
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-weight: 600;
-    font-size: 24px;
-    margin: 10px auto 5px auto;
-  }
-  #artist{
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-weight: 300;
-    font-size: 18px;
-    opacity: 70%;
-    margin-bottom: 10px;
-  }
-  #audio{
-    //delete once all custom audio control buttons are created.
-    width: 100%;
-    height: 80%;
-    top: 0;
-  }
-  #controlsBox{
+  margin-bottom: 1000px;
+  #controlsBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // border: 1px solid red;
+    margin-top: 20px;
+    // border: 1px solid $borderFaint;
     width: 100%;
     .invisible {
       visibility: hidden;
@@ -121,13 +35,12 @@ $rhap_font-family: inherit !default;
       border: 1px solid yellow;
     }
     .playPauseButton {
-      width: 100px;
-      height: 50px;
-      background-color: $swipoGreen;
-      border: none;
+      width: 110px;
+      height: 40px;
+      background-color: white;
       border-radius: 20px;
       margin-bottom: 10px;
-      color: white;
+      color: $smokeBlack;
       font-weight: 600;
       font-size: 15px;
       &:hover {
@@ -137,6 +50,7 @@ $rhap_font-family: inherit !default;
     }
     #openSpotifyButton{
       margin-right: 20px;
+      margin-top: -7px;
       img {
         width: 40px;
         height: 40px;
@@ -146,6 +60,109 @@ $rhap_font-family: inherit !default;
         }
       }
     }
+  }
+}
+
+.mainCard{
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: center;
+  
+  border-radius: 30px;
+  height: fit-content;
+  max-height: 450px;
+  max-width: 300px;
+  padding-bottom: 20px;
+  overflow: hidden;
+  background-color: white;
+  
+  //phone + tablet needs smaller margin-top
+  
+  // @media (min-height: 600px) {
+  //   margin-top: 60px;
+  // }
+  // @media (min-height: 650px) {
+  //   margin-top: 70px;
+  // }
+  // @media (min-height: 700px) {
+  //   margin-top: 100px;
+  // }
+  // @media (min-height: 750px) {
+  //   margin-top: 110px;
+  // }
+  // @media (min-height: 800px) {
+  //   margin-top: 130px;
+  // }
+  // @media (min-height: 850px) {
+  //   margin-top: 160px;
+  // }
+  // @media (min-height: 900px) {
+  //   margin-top: 190px;
+  // }
+  // @media (min-height: 950px) {
+  //   margin-top: 210px;
+  // }
+  // @media (min-height: 1000px) {
+  //   margin-top: 220px;
+  // }
+  // @media (min-height: 1050px) {
+  //   margin-top: 250px;
+  // }
+  // @media (min-height: 1100px) {
+  //   margin-top: 310px;
+  // }
+  // @media (min-height: 1150px) {
+  //   margin-top: 340px;
+  // }
+  // @media (min-height: 1200px) {
+  //   margin-top: 370px;
+  // }
+  // color: white;
+  // width: 375px;
+  // @media (max-width: 425px) {
+  //   width: 90vw;
+  // }
+  #albumCover{
+    width: 90%;
+    // @media (max-width: 425px) {
+    //   height: 220px;
+    //   width: 220px;
+    // }
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    border-radius: 30px;
+  }
+  #songName{
+    text-align: center;
+    // border: 1px solid black;
+    margin: 10px 0px 0px 0px;
+    padding: 0;
+    color: $altBlack;
+    h1 {
+      font-weight: 600;
+      font-size: 24px;
+      margin: 0;
+      // border: 1px solid black;
+    }
+  }
+  #artist{
+    text-align: center;
+    margin-bottom: 10px;
+    // border: 1px solid black;
+    h2 {
+      font-weight: 300;
+      font-size: 18px;
+      opacity: 70%;
+      margin: 5px 0px 0px 0px;
+    }
+  }
+  #audio{
+    //delete once all custom audio control buttons are created.
+    width: 100%;
+    height: 80%;
+    top: 0;
   }
 }
 

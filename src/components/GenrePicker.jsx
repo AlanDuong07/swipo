@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router-dom";
-import magglass from "../images/magglass.png";
+import darkMagglass from "../images/darkMagglass.png";
 
 let genre = ""
 // let s = null;
@@ -64,20 +64,21 @@ function GenrePicker() {
     }
   
     return (
-        <div className="PickGenrePage">
-            <div id="search-bar">
-                <input id="input" type="text" placeholder="Search for a genre..." onChange={handleQueryChange}/>
-                <button id="button" type="submit" onClick={searchAndRouteToMain}>
-                        <img src={magglass} alt="Search Button"></img>
+        <div id="genrePickerContainer">
+            <h1 id="genreHeader">Explore Page</h1>
+            <div id="searchBarContainer">
+                <input type="text" placeholder="Search for a genre..." onChange={handleQueryChange}/>
+                <button type="submit" onClick={searchAndRouteToMain}>
+                        <img src={darkMagglass} alt="Search Button"></img>
                 </button>
             </div>
             <div id="boxPlaylistTypeSelector">
                 <label>
-                    <p> Playlist </p>
+                    <p>Playlist</p>
                     <input type="radio" checked={playlist_type === "playlist"} onChange={() => handlePlaylistTypeChange("playlist")}/>
                 </label>
                 <label>
-                    <p> Album </p>
+                    <p>Album</p>
                     <input type="radio" checked={playlist_type === "album"} onChange={() => handlePlaylistTypeChange("album")}/>
                 </label>
             </div>

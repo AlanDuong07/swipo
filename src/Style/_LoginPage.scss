@@ -3,38 +3,41 @@ $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
 $altBlack: #161616;
 
+//new colors
+$offWhite: rgba(240, 240, 240, 1);
+
 .login-page{
     height: 100vh;
     width: 100vw;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    background-color: black;
+    justify-content: center;
+    align-items: center;
+    background-color: $offWhite;
+    // border: 1px solid purple;
     #swipo-logo {
         // border: 1px solid green;
-        width: 400px;
+        width: 300px;
         @media (max-width: 475px){
-            margin-left: 20px;
-            width: 90%;
+            width: 60%;
         }
         margin-bottom: 20px;
     }
     #login-button {
+        // border: 1px solid red;
+        width: fit-content;
         padding: 15px 25px;
-        background-color: white;
+        background-color: $swipoGreen;
         border-radius: 20px;
         &:hover {
-            background-color: $swipoGreen;
-            a {
-                color: white;
-            }
+            cursor: pointer;
+            opacity: 0.8;
         }
         a {
             text-decoration: none;
             font-size: 24px;
-            font-weight: 800;
-            color: black;
+            font-weight: 600;
+            color: $pureWhite;
         }
     }
 }
