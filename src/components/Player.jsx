@@ -134,7 +134,7 @@ function Player() {
     //CONDITIONAL RENDERING OF THE PLAYER COMPONENT. Don't render the cards if there isn't a current_tracks object yet!
     if (current_tracks !== null && current_tracks !== undefined) {
         return (
-            <div className='cardContainer'>
+            <div className='cardContainer pushDownFromNavBar'>
                 {
                     current_tracks[0].map((track) => 
                         <TinderCard className='swipe' key={track.songURI} onSwipe={(dir) => swiped(dir, track.songURI)}
