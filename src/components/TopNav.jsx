@@ -6,6 +6,10 @@ import profile from "../images/profile.png"
 import { useStateValue } from '../StateProvider'
 function TopNav() {
     const [{ user }] = useStateValue()
+    let profile_pic = profile
+    if (user && user.images[0] !== undefined) {
+        profile_pic = user.images[0].url
+    }
     return (
         <div className="top-nav">
             <Link to="/">
@@ -13,7 +17,7 @@ function TopNav() {
             </Link>
             <div>
                 <Link to="/main/player">
-                    <img src={user?.images[0].url} alt={profile} id="profile"></img>
+                    <img src={profile_pic} alt={profile} id="profile"></img>
                 </Link>
                 <Link to="/main/player">
                     <img src={hamburger} id="settings" alt="settings"></img>
