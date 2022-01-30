@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateProvider'
 import AudioPlayer from 'react-h5-audio-player'
+import platform from 'platform'
 // import 'react-h5-audio-player/lib/styles.css';
 import SpotifySmallLogo from '../images/SpotifySmallLogo.png'
 
@@ -17,8 +18,11 @@ function MainCard(props) {
             // console.log("In useEffect for mainCard, current_track != null!. current_track.songURI: ", current_track.songURI)
             // console.log("Current card's songURI: ", props.songURI)
             if (current_track.songURI === props.songURI) {
-                console.log("Just set the song to play!")
-                player.current.audio.current.play()
+                //iOS and Safari have autoplay restrictions. For now, just turn off autoplay on those devices.
+                if (platform.name != 'Safari' && platform.os.family != 'iOS') {
+                    console.log("Just set the song to play!")
+                    player.current.audio.current.play()
+                }
             } else {
                 player.current.audio.current.pause()
             }
