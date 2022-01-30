@@ -19,7 +19,7 @@ function MainCard(props) {
             // console.log("Current card's songURI: ", props.songURI)
             if (current_track.songURI === props.songURI) {
                 //iOS and Safari have autoplay restrictions. For now, just turn off autoplay on those devices.
-                if (platform.name != 'Safari' && platform.os.family != 'iOS') {
+                if (platform.name !== 'Safari' && platform.os.family !== 'iOS') {
                     console.log("Just set the song to play!")
                     player.current.audio.current.play()
                 }

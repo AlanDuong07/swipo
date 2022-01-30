@@ -2,6 +2,8 @@
     // border: 1px solid purple;
     display: flex;
     flex-direction: column;
+    max-height: 100vh;
+    overflow: hidden;
     @media (min-height: 600px) {
         margin-top: 0px;
     }
