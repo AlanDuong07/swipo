@@ -21,6 +21,104 @@ $rhap_font-family: inherit !default;
   display: flex;
   flex-direction: column;
   margin-bottom: 1000px;
+  @media (min-height: 600px) {
+    padding-top: 100px;
+  }
+  @media (min-height: 650px) {
+      padding-top: 100px;
+  }
+  @media (min-height: 700px) {
+      padding-top: 140px;
+  }
+  @media (min-height: 750px) {
+      padding-top: 170px;
+  }
+  @media (min-height: 800px) {
+      padding-top: 180px;
+  }
+  @media (min-height: 850px) {
+      padding-top: 200px;
+  }
+  @media (min-height: 900px) {
+      padding-top: 250px;
+  }
+  @media (min-height: 950px) {
+      padding-top: 280px;
+  }
+  @media (min-height: 1000px) {
+      padding-top: 320px;
+  }
+  @media (min-height: 1050px) {
+      padding-top: 350px;
+  }
+  @media (min-height: 1100px) {
+      padding-top: 410px;
+  }
+  @media (min-height: 1150px) {
+      padding-top: 440px;
+  }
+  @media (min-height: 1200px) {
+      padding-top: 470px;
+  }
+  .mainCard{
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: center;
+    
+    border-radius: 30px;
+    height: fit-content;
+    max-height: 375px;
+    max-width: 300px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    background-color: white;
+    
+    #albumCover{
+      width: 90%;
+      // @media (max-width: 425px) {
+      //   height: 220px;
+      //   width: 220px;
+      // }
+      align-items: center;
+      justify-content: center;
+      margin-top: 15px;
+      border-radius: 30px;
+    }
+    #songName{
+      // border: 1px solid black;
+      margin: 10px 15px 0px 15px;
+      padding: 0;
+      color: $altBlack;
+      max-width: 260px;
+      overflow: scroll;
+      h1 {
+        font-weight: 600;
+        font-size: 24px;
+        margin: 0;
+        // border: 1px solid black;
+      }
+    }
+    #artist{
+      text-align: center;
+      margin-bottom: 10px;
+      // border: 1px solid black;
+      max-width: 260px;
+      overflow: scroll;
+      h2 {
+        font-weight: 300;
+        font-size: 18px;
+        color: #16161691;
+        margin: 5px 0px 0px 0px;
+      }
+    }
+    #audio{
+      //delete once all custom audio control buttons are created.
+      width: 100%;
+      height: 80%;
+      top: 0;
+    }
+  }
   #controlsBox {
     display: flex;
     justify-content: space-between;
@@ -60,63 +158,6 @@ $rhap_font-family: inherit !default;
         }
       }
     }
-  }
-}
-
-.mainCard{
-  display: flex;
-  flex-direction: column;
-  justify-items: flex-start;
-  align-items: center;
-  
-  border-radius: 30px;
-  height: fit-content;
-  max-height: 450px;
-  max-width: 300px;
-  padding-bottom: 20px;
-  overflow: hidden;
-  background-color: white;
-  
-  #albumCover{
-    width: 90%;
-    // @media (max-width: 425px) {
-    //   height: 220px;
-    //   width: 220px;
-    // }
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
-    border-radius: 30px;
-  }
-  #songName{
-    text-align: center;
-    // border: 1px solid black;
-    margin: 10px 0px 0px 0px;
-    padding: 0;
-    color: $altBlack;
-    h1 {
-      font-weight: 600;
-      font-size: 24px;
-      margin: 0;
-      // border: 1px solid black;
-    }
-  }
-  #artist{
-    text-align: center;
-    margin-bottom: 10px;
-    // border: 1px solid black;
-    h2 {
-      font-weight: 300;
-      font-size: 18px;
-      color: #16161691;
-      margin: 5px 0px 0px 0px;
-    }
-  }
-  #audio{
-    //delete once all custom audio control buttons are created.
-    width: 100%;
-    height: 80%;
-    top: 0;
   }
 }
 

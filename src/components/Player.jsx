@@ -119,9 +119,17 @@ function Player() {
         }
     }
 
-    //useEffect that checks if the playlist has been completely swiped on. If so, redirect to the genrepage to continue discovering music.
+    // useEffect that checks if the playlist has been completely swiped on. If so, redirect to the genrepage to continue discovering music.
     useEffect(() => {
-        if (current_track === null && current_tracks === null && current_playlist === null) {
+        //first try retrieving a current_playlist from local storage, in the case that the user
+        //simply refreshed the page. 
+        let localPlaylist = JSON.parse(localStorage.getItem('Current Playlist'));
+        if (localPlaylist && !current_playlist) {
+            dispatch({
+                type: "SET_CURRENT_PLAYLIST",
+                current_playlist: localPlaylist
+            })
+        } else if (current_track === null && current_tracks === null && current_playlist === null) {
             history.push("/main/genrepicker")
         }
     }, [current_track, current_playlist, current_tracks, dispatch, history])
@@ -171,7 +179,7 @@ function getPlaylistTrackInfo(playlistTracks, songCounter) {
         console.log("playlistTracks is undefined or 0, ");
         return [];
     }
-    console.log("playlistTracks in getPlaylistTrackInfo", playlistTracks)
+    // console.log("playlistTracks in getPlaylistTrackInfo", playlistTracks)
 
     let songName = null
     let artists = ""

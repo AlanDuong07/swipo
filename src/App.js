@@ -18,31 +18,41 @@ function App() {
         // Set token
         const hash = getTokenFromResponse();
         window.location.hash = "";
-        let _token = hash.access_token;
+        //Get either the hashToken from the main login flow, or retrieve a locally stored
+        //token from localStorage and try using that.
+        let hashToken = hash.access_token;
+        let localToken = JSON.parse(localStorage.getItem('Token'));
+        // console.log("hashToken at this time: ", hashToken)
+        if (hashToken || localToken) {
+            let currentToken = hashToken ? hashToken : localToken;
+            // console.log('currentToken is currently: ', currentToken);
+            if (hashToken) {
+                //only set a new token in local storage if we just went through
+                //the main login flow, and just got a new token.
+                localStorage.setItem('Token', JSON.stringify(hashToken));
+            }
 
-        if (_token) {
-        s.setAccessToken(_token);
+            s.setAccessToken(currentToken);
+            if (currentToken) {
+                dispatch({
+                    type: "SET_TOKEN",
+                    token: currentToken,
+                });
+            }
 
-        dispatch({
-            type: "SET_TOKEN",
-            token: _token,
-        });
-
-        dispatch({
-            type: "SET_SPOTIFY",
-            spotify: s,
-        });
-
-        s.getMe().then((user) => {
             dispatch({
-            type: "SET_USER",
-            user,
+                type: "SET_SPOTIFY",
+                spotify: s,
             });
-        });
-        
+
+            s.getMe().then((user) => {
+                dispatch({
+                type: "SET_USER",
+                user,
+                });
+            });
         }
     }, [token, dispatch]);
-
 
     //useEffect that runs whenever a new user enters the system. It looks for an existing Swipo playlist, or 
     //creates a new one for the user.
@@ -51,7 +61,7 @@ function App() {
         const playlistName = "Swipo"
 
         let found_swipo_playlist = false
-        if (user !== null) {
+        if (user !== null && spotify !== undefined && spotify !== null) {
             spotify.getUserPlaylists(user.id ,null, function (err, data) {
                 if (err) {
                     console.error(err);

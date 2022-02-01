@@ -20,32 +20,23 @@ function GenrePicker() {
                     console.log(err)
                 } else {
                     console.log("Finished searching! Here's the data: ", data)
-                    if (playlist_type === "playlist") {
-                        if (data.playlists.items.length === 0) {
-                            console.log("No playlists found!")
-                        } else {
-                            playlist = data.playlists.items[0]
-                            console.log("playlistType is playlist. Putting in this playlist: ", playlist)
-                            dispatch({
-                                type: "SET_CURRENT_PLAYLIST",
-                                current_playlist: playlist
-                            })
-                            let path = "/main/player/"
-                            history.push(path)
-                        }
+                    if (data.playlists.items.length === 0) {
+                        console.log("No playlists found!")
                     } else {
-                        if (data.albums.items.length === 0) {
-                            console.log("No albums found!")
+                        if (playlist_type === "playlist") {
+                            playlist = data.playlists.items[0]
+                            console.log("playlistType is playlist. Putting in this playlist: ", playlist);
                         } else {
                             playlist = data.albums.items[0]
-                            console.log("playlistType is album. Putting in this album: ", playlist)
-                            dispatch({
-                                type: "SET_CURRENT_PLAYLIST",
-                                current_playlist: playlist
-                            })
-                            let path = "/main/player/"
-                            history.push(path)
+                            console.log("playlistType is album. Putting in this album: ", playlist);
                         }
+                        localStorage.setItem('Current Playlist', JSON.stringify(playlist));
+                        dispatch({
+                            type: "SET_CURRENT_PLAYLIST",
+                            current_playlist: playlist
+                        })
+                        let path = "/main/player/"
+                        history.push(path)
                     }
                 }
             })
