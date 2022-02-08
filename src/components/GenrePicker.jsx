@@ -51,7 +51,7 @@ function GenrePicker() {
                         } else {
                             dispatch({
                                 type: "SET_PLAYLIST_GRID_ARRAY_DATA",
-                                playlistGridArrayData: data.playlists.items
+                                playlistGridArrayData: data.albums.items
                             })
                             console.log("just setPlaylistGridArrayData: ", playlistGridArrayData);
                             // playlist = data.albums.items[0];
