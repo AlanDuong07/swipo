@@ -102,14 +102,14 @@ $rhap_font-family: inherit !default;
       padding: 0;
       color: $altBlack;
       max-width: 260px;
-      overflow-x: auto;
-      // overflow-y: hidden;
-      white-space: nowrap;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  
+      // overflow-x: auto;
+      // // overflow-y: hidden;
+      // white-space: nowrap;
+      // &::-webkit-scrollbar {
+      //   display: none;
+      // }
+      // -ms-overflow-style: none;  /* IE and Edge */
+      // scrollbar-width: none;  
       h1 {
         font-weight: 600;
         font-size: 24px;
@@ -122,15 +122,14 @@ $rhap_font-family: inherit !default;
       margin-bottom: 10px;
       // border: 1px solid black;
       max-width: 260px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+      // overflow-x: auto;
+      // overflow-y: hidden;
+      // white-space: nowrap;
+      // &::-webkit-scrollbar {
+      //   display: none;
+      // }
+      // -ms-overflow-style: none;  /* IE and Edge */
+      // scrollbar-width: none;  /* Firefox */
       h2 {
         font-weight: 300;
         font-size: 18px;
