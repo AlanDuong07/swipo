@@ -1,7 +1,7 @@
 $swipoGreen: #10D48E;
 $pureWhite: #FFFFFF;
 $richBlack: #0E0F0E;
-$altBlack: #161616;
+$altBlack: rgba(22,22,22,1);
 $smokeBlack: #434F4A;
 
 $rhap_theme-color: $pureWhite;   // 
@@ -23,6 +23,8 @@ $rhap_font-family: inherit !default;
   justify-content: center;
   align-items: center;
   margin-bottom: 1000px;
+  
+  z-index: 3;
   // border: 1px solid black;
   // width: fit-content;
   @media (min-height: 500px) {
@@ -74,7 +76,7 @@ $rhap_font-family: inherit !default;
     align-items: center;
     // border: 1px solid black;
     border-radius: 30px;
-    aspect-ratio: 4/5;
+    aspect-ratio: 3/4;
     max-height: 425px;
     max-width: 89vw;
     @media (max-height: 600px) {
