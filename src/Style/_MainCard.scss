@@ -27,7 +27,7 @@ $rhap_font-family: inherit !default;
   z-index: 3;
   // border: 1px solid black;
   // width: fit-content;
-  @media (min-height: 500px) {
+  @media (min-height: 100px) {
     padding-top: 100px;
   }
   @media (min-height: 600px) {
@@ -102,9 +102,8 @@ $rhap_font-family: inherit !default;
       padding: 0;
       color: $altBlack;
       max-width: 260px;
-      // overflow-x: auto;
-      // // overflow-y: hidden;
-      // white-space: nowrap;
+      overflow-x: auto;
+      white-space: nowrap;
       // &::-webkit-scrollbar {
       //   display: none;
       // }
@@ -122,9 +121,8 @@ $rhap_font-family: inherit !default;
       margin-bottom: 10px;
       // border: 1px solid black;
       max-width: 260px;
-      // overflow-x: auto;
-      // overflow-y: hidden;
-      // white-space: nowrap;
+      overflow-x: auto;
+      white-space: nowrap;
       // &::-webkit-scrollbar {
       //   display: none;
       // }
