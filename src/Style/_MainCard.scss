@@ -77,22 +77,23 @@ $rhap_font-family: inherit !default;
     // border: 1px solid black;
     border-radius: 30px;
     width: 275px;
-    max-height: 335px;
+    // max-height: 335px;
     @media (max-width: 475px) {
       max-width: 75vw;
     }
     @media (max-height: 600px) {
       max-width: 60vw;
     }
-    padding: 20px;
+    // padding: 20px;
     background-color: white;
     
     #albumCover{
-      width: 100%;
+      width: 90%;
+      aspect-ratio: 1/1;
       align-items: center;
       justify-content: center;
-      // margin-top: 15px;
-      border-radius: 25px;
+      margin-top: 15px;
+      border-radius: 20px;
     }
     #songName{
       // border: 1px solid black;

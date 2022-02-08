@@ -82,6 +82,14 @@ function GenrePicker() {
     const handleQueryChange = (event) => {
         genre = event.target.value;
     }
+
+    function inputKeyUp(e) {
+        e.which = e.which || e.keyCode;
+        if(e.which == 13) {
+            document.getElementById("searchBarSubmit").click();
+        }
+    }
+
     const handlePlaylistTypeChange = function(playlistTypeString) {
         dispatch({
             type: "SET_PLAYLIST_TYPE",
@@ -92,8 +100,8 @@ function GenrePicker() {
         <div id="genrePickerContainer">
             <h1 id="genreHeader">Explore Page</h1>
             <div id="searchBarContainer">
-                <input type="text" placeholder="Search for a genre..." onChange={handleQueryChange}/>
-                <button type="submit" onClick={searchAndRouteToMain}>
+                <input type="text" placeholder="Search for a genre..." onChange={handleQueryChange} onKeyUp={inputKeyUp}/>
+                <button id="searchBarSubmit" type="submit" onClick={searchAndRouteToMain}>
                         <img src={darkMagglass} alt="Search Button"></img>
                 </button>
             </div>
@@ -109,7 +117,7 @@ function GenrePicker() {
             </div>
             {   
                 error
-                ? <p>No playlists were found!</p>
+                ? <p>No playlists were found for that last search!</p>
                 : <p></p> 
             }
             <div id="playlistGrid">
