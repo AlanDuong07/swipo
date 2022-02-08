@@ -76,24 +76,22 @@ $rhap_font-family: inherit !default;
     align-items: center;
     // border: 1px solid black;
     border-radius: 30px;
-    aspect-ratio: 3/4;
-    max-height: 425px;
-    max-width: 89vw;
-    @media (max-height: 600px) {
+    width: 275px;
+    max-height: 335px;
+    @media (max-width: 475px) {
       max-width: 75vw;
     }
-    padding-bottom: 10px;
+    @media (max-height: 600px) {
+      max-width: 60vw;
+    }
+    padding: 20px;
     background-color: white;
     
     #albumCover{
-      width: 90%;
-      // @media (max-width: 425px) {
-      //   height: 220px;
-      //   width: 220px;
-      // }
+      width: 100%;
       align-items: center;
       justify-content: center;
-      margin-top: 15px;
+      // margin-top: 15px;
       border-radius: 25px;
     }
     #songName{
@@ -101,18 +99,19 @@ $rhap_font-family: inherit !default;
       margin: 10px 15px 0px 15px;
       padding: 0;
       color: $altBlack;
-      max-width: 260px;
-      overflow-x: auto;
-      white-space: nowrap;
-      // &::-webkit-scrollbar {
-      //   display: none;
-      // }
-      // -ms-overflow-style: none;  /* IE and Edge */
-      // scrollbar-width: none;  
+      max-width: 95%;
       h1 {
         font-weight: 600;
         font-size: 24px;
         margin: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none; 
         // border: 1px solid black;
       }
     }
@@ -120,19 +119,20 @@ $rhap_font-family: inherit !default;
       text-align: center;
       margin-bottom: 10px;
       // border: 1px solid black;
-      max-width: 260px;
-      overflow-x: auto;
-      white-space: nowrap;
-      // &::-webkit-scrollbar {
-      //   display: none;
-      // }
-      // -ms-overflow-style: none;  /* IE and Edge */
-      // scrollbar-width: none;  /* Firefox */
+      max-width: 95%;
       h2 {
         font-weight: 300;
         font-size: 18px;
         color: #16161691;
         margin: 5px 0px 0px 0px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;
       }
     }
     #audio{
@@ -174,7 +174,7 @@ $rhap_font-family: inherit !default;
       // margin-right: 20px;
       margin-top: -7px;
       border: none;
-
+      background-color: transparent;
       img {
         width: 40px;
         height: 40px;
