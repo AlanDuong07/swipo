@@ -20,7 +20,14 @@ $rhap_font-family: inherit !default;
 .mainCardWrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 1000px;
+  // border: 1px solid black;
+  // width: fit-content;
+  @media (min-height: 500px) {
+    padding-top: 100px;
+  }
   @media (min-height: 600px) {
     padding-top: 100px;
   }
@@ -65,11 +72,14 @@ $rhap_font-family: inherit !default;
     flex-direction: column;
     justify-items: flex-start;
     align-items: center;
-    
+    // border: 1px solid black;
     border-radius: 30px;
-    height: fit-content;
-    max-height: 375px;
-    max-width: 300px;
+    aspect-ratio: 4/5;
+    max-height: 425px;
+    max-width: 89vw;
+    @media (max-height: 600px) {
+      max-width: 75vw;
+    }
     padding-bottom: 10px;
     background-color: white;
     
@@ -135,7 +145,8 @@ $rhap_font-family: inherit !default;
   }
   #controlsBox {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     align-items: center;
     margin-top: 20px;
     // border: 1px solid $borderFaint;
@@ -161,9 +172,10 @@ $rhap_font-family: inherit !default;
       }
     }
     .openSpotifyButton{
-      margin-right: 20px;
+      // margin-right: 20px;
       margin-top: -7px;
       border: none;
+
       img {
         width: 40px;
         height: 40px;

@@ -9,14 +9,14 @@ $borderFaint: #DDDDDD;
 $input-font-size: 25px;
 
 #genrePickerContainer {
-    border: 3px solid red;
+    // border: 3px solid red;
     display: flex; 
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: fit-content;
-    margin-top: 100px;
+    margin-top: 105px;
     overflow: auto;
     #genreHeader {
         font-size: 40px;
@@ -99,7 +99,7 @@ $input-font-size: 25px;
     align-items: flex-start;
     padding-bottom: 200px;
     // border: 3px solid black;
-    width: clamp(200px, 90%, 900px);
+    width: clamp(200px, 95%, 900px);
 }
 .playlistGridItem button{
     display: flex;
