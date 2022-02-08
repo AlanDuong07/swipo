@@ -144,10 +144,10 @@ function Player() {
         return (
             <div className='cardContainer pushDownFromNavBar'>
                 {
-                    current_tracks[0].map((track) => 
-                        <TinderCard className='swipe' key={track.songURI} onSwipe={(dir) => swiped(dir, track.songURI)}
+                    current_tracks[0].map((track, index) => 
+                        <TinderCard className='swipe' key={track.songURI + index} onSwipe={(dir) => swiped(dir, track.songURI)}
                             onCardLeftScreen={() => outOfFrame(track.name)} preventSwipe = {['up', 'down']}>
-                            <MainCard track={track} isSwiped={track.isSwiped} songURI={track.songURI}/>
+                            <MainCard track={track} isSwiped={track.isSwiped} songURI={track.songURI} id={track.songURI + index}/>
                         </TinderCard>
                     )
                 }

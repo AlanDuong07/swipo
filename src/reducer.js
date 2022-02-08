@@ -2,6 +2,7 @@ export const initialState = {
     user: null,
     token: null,
     spotify: null,
+    playlistGridArrayData: null,
     current_playlist: null,
     playlist_type: 'playlist',
     current_tracks: null,
@@ -30,6 +31,12 @@ export const initialState = {
             spotify: action.spotify,
             };
 
+        case "SET_PLAYLIST_GRID_ARRAY_DATA":
+            return {
+            ...state,
+            playlistGridArrayData: action.playlistGridArrayData,
+            };
+        
         case "SET_CURRENT_PLAYLIST":
             return {
             ...state,

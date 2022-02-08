@@ -5,11 +5,12 @@ import AudioPlayer from 'react-h5-audio-player'
 import platform from 'platform'
 // import 'react-h5-audio-player/lib/styles.css';
 import SpotifySmallLogo from '../images/SpotifySmallLogo.png'
+import BigFloppa from '../images/bigFloppa.png'
 
 function MainCard(props) {
     const [{ current_track }] = useStateValue()
     const player = useRef()
-
+    let image = props.track.albumImageUrl ? props.track.albumImageUrl : BigFloppa;
     // useEffect that checks whenever the current_track has changed, and whether the current_track is this individual MainCard.
     // if it is, then play the audio for this individual MainCard. If not, then don't play it.
     useEffect(() => {
@@ -35,9 +36,9 @@ function MainCard(props) {
     //useEffect that runs whenever the player is changed. It retrieves this specific playPauseButton and adds a touchend
     //listener that will toggle play/pause based on the current state of paused. 
     useEffect(() => {
-        if (document.getElementById(`playPauseButton${props.songURI}`)) {
-            document.getElementById(`playPauseButton${props.songURI}`).addEventListener("touchend", function() {
-                console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.songURI}`) )
+        if (document.getElementById(`playPauseButton${props.id}`)) {
+            document.getElementById(`playPauseButton${props.id}`).addEventListener("touchend", function() {
+                console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.id}`) )
                 if (player.current.audio.current.paused) {
                     player.current.audio.current.play()
                 } 
@@ -45,8 +46,8 @@ function MainCard(props) {
                     player.current.audio.current.pause()
                 }
             })
-            document.getElementById(`playPauseButton${props.songURI}`).addEventListener("click", function() {
-                console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.songURI}`) )
+            document.getElementById(`playPauseButton${props.id}`).addEventListener("click", function() {
+                console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.id}`) )
                 if (player.current.audio.current.paused) {
                     player.current.audio.current.play()
                 } 
@@ -55,11 +56,21 @@ function MainCard(props) {
                 }
             })
         }
+        if (document.getElementById(`openSpotifyButton${props.id}`)) {
+            document.getElementById(`openSpotifyButton${props.id}`).addEventListener("click", function() {
+                console.log("Clicked the open spotify button!");
+                window.open(props.track.openSpotifyUrl, '_blank');
+            })
+            document.getElementById(`openSpotifyButton${props.id}`).addEventListener("touchend", function() {
+                console.log("Yo! Clicked the open spotify button!");
+                window.open(props.track.openSpotifyUrl, '_blank');
+            })
+        }
     }, [player, props.songURI])
     return (
         <div className="mainCardWrapper">
             <div className="mainCard borderFaint">
-                <img src={props.track.albumImageUrl} alt="Album/Song cover" id="albumCover"></img>
+                <img src={image} alt="Album/Song cover" id="albumCover"></img>
                 <div id="songName">
                     <h1>{props.track.name}</h1>
                 </div>
@@ -82,10 +93,10 @@ function MainCard(props) {
             </div>
             <div id="controlsBox">
                 <div className="invisible">Invisible Flex Item</div>
-                <button className="playPauseButton borderFaint" id={"playPauseButton" + props.songURI}>Play/Pause</button>
-                <a id="openSpotifyButton" href={props.track.openSpotifyUrl} target="_blank" rel="noreferrer" alt="Spotify Link">
+                <button className="playPauseButton borderFaint" id={"playPauseButton" + props.id}>Play/Pause</button>
+                <button className="openSpotifyButton" id={"openSpotifyButton" + props.id} alt="Spotify Link">
                     <img src={SpotifySmallLogo}/>
-                </a>
+                </button>
             </div>
         </div>
         

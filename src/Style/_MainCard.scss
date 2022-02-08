@@ -71,7 +71,6 @@ $rhap_font-family: inherit !default;
     max-height: 375px;
     max-width: 300px;
     padding-bottom: 10px;
-    overflow: hidden;
     background-color: white;
     
     #albumCover{
@@ -83,7 +82,7 @@ $rhap_font-family: inherit !default;
       align-items: center;
       justify-content: center;
       margin-top: 15px;
-      border-radius: 30px;
+      border-radius: 25px;
     }
     #songName{
       // border: 1px solid black;
@@ -91,7 +90,14 @@ $rhap_font-family: inherit !default;
       padding: 0;
       color: $altBlack;
       max-width: 260px;
-      overflow: scroll;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  
       h1 {
         font-weight: 600;
         font-size: 24px;
@@ -104,7 +110,15 @@ $rhap_font-family: inherit !default;
       margin-bottom: 10px;
       // border: 1px solid black;
       max-width: 260px;
-      overflow: scroll;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
       h2 {
         font-weight: 300;
         font-size: 18px;
@@ -146,9 +160,10 @@ $rhap_font-family: inherit !default;
         color: rgba(white, 0.7);
       }
     }
-    #openSpotifyButton{
+    .openSpotifyButton{
       margin-right: 20px;
       margin-top: -7px;
+      border: none;
       img {
         width: 40px;
         height: 40px;
