@@ -109,19 +109,22 @@ $input-font-size: 25px;
     border: 1px solid $borderFaint;
     border-radius: 20px;
     background-color: white;
-    aspect-ratio: 4/5;
+    aspect-ratio: 6/7;
     padding: 10px 10px 5px 10px;
     img {
         border-radius: 15px;
         height: 150px;
         width: 150px;
+        margin-bottom: 10px;
     }
     p {
         max-width: 150px;
+        // max-height: 14px;
         overflow-x: auto;
         overflow-y: hidden;
         white-space: nowrap;
         color: $altBlack;
+        margin: 0;
         &::-webkit-scrollbar {
             display: none;
         }
