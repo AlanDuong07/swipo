@@ -120,11 +120,11 @@ $input-font-size: 25px;
     p {
         max-width: 150px;
         // max-height: 14px;
+        color: $altBlack;
+        margin: 0;
         overflow-x: auto;
         overflow-y: hidden;
         white-space: nowrap;
-        color: $altBlack;
-        margin: 0;
         &::-webkit-scrollbar {
             display: none;
         }
