@@ -11,7 +11,7 @@ export const initialState = {
   };
   
   const reducer = (state, action) => {
-    console.log(action);
+    console.log(`Doing action ${action.type}: action object is`, action);
     switch (action.type) {
         case "SET_USER":
             return {
@@ -62,7 +62,7 @@ export const initialState = {
             };
 
         case "SET_SWIPO_PLAYLIST":
-            console.log("setting swipo playlist", action);
+            // console.log("setting swipo playlist", action);
             return {
                 ...state,
                 swipo_playlist: action.swipo_playlist,

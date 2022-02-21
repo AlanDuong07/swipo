@@ -10,7 +10,7 @@ import LoginPage from "./components/LoginPage";
 const s = new SpotifyWebApi();
 
 function App() {
-    const [{ token, user, spotify }, dispatch] = useStateValue();
+    const [{ user, spotify, swipo_playlist }, dispatch] = useStateValue();
 
     //useEffect that runs whenever the token is changed. Usually runs right after the login button is clicked.
     //retrieves a token and sets various global states to be used throughout the app.
@@ -48,27 +48,27 @@ function App() {
             s.getMe().then((user) => {
                 dispatch({
                 type: "SET_USER",
-                user,
+                user: user,
                 });
             });
         }
-    }, [token, dispatch]);
+    }, [dispatch]);
 
     //useEffect that runs whenever a new user enters the system. It looks for an existing Swipo playlist, or 
-    //creates a new one for the user.
+    //creates a new one for the user. If there is already a swipo_playlist state, it doesn't run.
     useEffect(() => {
         //name of Swipo Playlist that songs will be saved to
         const playlistName = "Swipo"
 
-        let found_swipo_playlist = false
-        if (user !== null && spotify !== undefined && spotify !== null) {
+        let found_swipo_playlist = swipo_playlist !== null ? true : false;
+        if (!found_swipo_playlist && user !== null && spotify !== undefined && spotify !== null) {
+            console.log("Finally got through! Swipo playlist should be null: ", swipo_playlist);
             spotify.getUserPlaylists(user.id ,null, function (err, data) {
                 if (err) {
                     console.error(err);
                 }
                 else {
                     if (data !== undefined) {
-                        console.log("User playlists: " + data.items[0].name)
                         for (let i = 0; i < data.items.length; i++) {
                             if (data.items[i].name === playlistName) {
                                 console.log("Found existing Swipo playlist")
@@ -94,7 +94,7 @@ function App() {
                 }
             });
         }
-    }, [user, dispatch, spotify]);
+    }, [dispatch, spotify, user, swipo_playlist]);
 
     return (
         <Router>
