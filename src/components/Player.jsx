@@ -8,7 +8,6 @@ import TinderCardContainer from './TinderCardContainer';
 
 function Player() {
     const [{ current_playlist, playlist_type, spotify, current_track, current_tracks }, dispatch] = useStateValue();
-    // const [playlistNeedsChanging, setPlaylistNeedsChanging] = useState(true)
     const history = useHistory()
     let playlistNeedsChanging = true
     

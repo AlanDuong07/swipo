@@ -2,10 +2,11 @@ import {React, useEffect} from 'react';
 import Hammer from 'hammerjs';
 import { useStateValue } from "../StateProvider";
 import MainCard from './MainCard';
-
+import { useHistory } from "react-router-dom";
 
 function TinderCardContainer() {
   const [{ spotify, swipo_playlist,  current_playlist, current_track, current_tracks}, dispatch] = useStateValue();
+  const history = useHistory()
   let allCards;
 
   //useEffect that contains the swiping framework for all of the tinder cards. 
@@ -150,6 +151,7 @@ function TinderCardContainer() {
                     type: "SET_CURRENT_PLAYLIST",
                     current_playlist: null
                 })
+                history.push("/main/genrepicker");
             } else {
               // console.log("current_tracks object before setting: ", current_tracks);
               console.log("setting new current track to be: ", current_tracks[0][i + 1]);
