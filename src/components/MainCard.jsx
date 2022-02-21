@@ -68,7 +68,7 @@ function MainCard(props) {
         }
     }, [player, props.songURI])
     return (
-        <div className="mainCardWrapper">
+        <div className="tinderCard" id={props.id}>
             <div className="mainCard borderFaint">
                 <img src={image} alt="Album/Song cover" id="albumCover"></img>
                 <div id="songName">
