@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateProvider'
 import AudioPlayer from 'react-h5-audio-player'
 import platform from 'platform'
@@ -95,7 +94,7 @@ function MainCard(props) {
                 <div className="invisible">Invisible Flex Item</div>
                 <button className="playPauseButton borderFaint" id={"playPauseButton" + props.id}>Play/Pause</button>
                 <button className="openSpotifyButton" id={"openSpotifyButton" + props.id} alt="Spotify Link">
-                    <img src={SpotifySmallLogo}/>
+                    <img src={SpotifySmallLogo} alt="Spotify Logo"/>
                 </button>
             </div>
         </div>

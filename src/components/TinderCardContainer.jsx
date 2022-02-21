@@ -108,7 +108,7 @@ function TinderCardContainer() {
   function initCards() {
     let newCards = document.querySelectorAll('.tinderCard:not(.removed)');
     newCards.forEach(function (card, index) {
-      card.style.zIndex = allCards.length - index;
+      card.style.zIndex = allCards.length - index + 100;
       // card.style.transform = 'scale(' + (20 - index) / 20 + ') translateY(-' + 30 * index + 'px)';
       if (index === 0 || index === 1) {
         card.style.opacity = 1;
