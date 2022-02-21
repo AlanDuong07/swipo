@@ -20,7 +20,7 @@ $rhap_font-family: inherit !default;
   display: flex;
   position: absolute;
   will-change: transform;
-  transition: all 0.06s linear;
+  transition: all 0.25s linear;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,8 +56,8 @@ $rhap_font-family: inherit !default;
       aspect-ratio: 1/1;
       align-items: center;
       justify-content: center;
-      margin-top: 15px;
-      border-radius: 20px;
+      margin-top: 25px;
+      // border-radius: 20px;
     }
     #songName{
       // border: 1px solid black;

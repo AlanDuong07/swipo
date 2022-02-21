@@ -5,18 +5,16 @@ import MainCard from './MainCard';
 import { useHistory } from "react-router-dom";
 
 function TinderCardContainer() {
-  const [{ spotify, swipo_playlist,  current_playlist, current_track, current_tracks}, dispatch] = useStateValue();
+  const [{ spotify, swipo_playlist, current_tracks}, dispatch] = useStateValue();
   const history = useHistory()
   let allCards;
 
   //useEffect that contains the swiping framework for all of the tinder cards. 
   //Runs only once, as you don't want to add extra event listeners than necessary.
   useEffect(() => {
-    // if (current_playlist !== null && current_track !== null && current_tracks !== null) {
-      console.log("AYYYYYYYY")
       //select all of the tinderCard wrapper divs on the DOM
       allCards = document.querySelectorAll(".tinderCard");
-      // console.log("allCards", allCards);
+
       //initial initiation of cards, setting their z-index and opacity.
       initCards();
 
@@ -34,11 +32,9 @@ function TinderCardContainer() {
         //their mouse.
         hammertime.on('pan', function (event) {
           if (event.deltaX === 0) {
-            // console.log("TESTING HAMMERTIME PAN NO MOVEMENT")
             return;
           }
           if (event.center.x === 0 && event.center.y === 0) {
-            // console.log("TESTING HAMMERTIME PAN CENTER X + Y 0")
             return;
           }
           let xMulti = event.deltaX * 0.03;
@@ -62,10 +58,8 @@ function TinderCardContainer() {
 
           if (keep) {
             singleCard.style.transform = '';
-            // console.log("KEEPING THIS TINDERCARD");
           } else {
             //calculations to transform the card when it was swiped enough.
-            // console.log("NOT KEEPING THIS TINDERCARD");
             let directionSwiped = event.direction === 2 ? "left" : "right";
             let endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
             let toX = event.deltaX > 0 ? endX : -endX;
@@ -88,7 +82,6 @@ function TinderCardContainer() {
 
             //make the card leave the screen
             singleCard.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
-            singleCard.style.display = 'none';
             singleCard.classList.toggle('removed', !keep);
             //reinitialize the remaining cards.
             initCards();
@@ -102,7 +95,6 @@ function TinderCardContainer() {
   //initializes any non swiped on cards, stacking them on top of each other.
   function initCards() {
     let newCards = document.querySelectorAll('.tinderCard:not(.removed)');
-    // console.log("NewCards", newCards)
     newCards.forEach(function (card, index) {
       card.style.zIndex = allCards.length - index;
       // card.style.transform = 'scale(' + (20 - index) / 20 + ') translateY(-' + 30 * index + 'px)';
@@ -120,7 +112,6 @@ function TinderCardContainer() {
     return new Promise(resolve => {
       if (current_tracks !== null) {
         if (direction === "right" && swipo_playlist !== null) {
-          // console.log("hello")
           spotify.addTracksToPlaylist(swipo_playlist.id, [songURI], null, function (err, data) {
               if (err) console.error(err);
               else {
@@ -135,8 +126,6 @@ function TinderCardContainer() {
         //If the track that was just deleted was the last track, then current_track will be set to undefined.
         for (let i = 0; i < current_tracks[0].length; i++) {
           if (current_tracks[0][i].songURI === songURI) {
-            // console.log("Found the current track!")
-            // console.log("songURI of song just deleted: ", songURI)
             if (i === (current_tracks[0].length - 1)) {
                 console.log("Just swiped the last song! Setting current_track to null.")
                 dispatch({
@@ -153,7 +142,6 @@ function TinderCardContainer() {
                 })
                 history.push("/main/genrepicker");
             } else {
-              // console.log("current_tracks object before setting: ", current_tracks);
               console.log("setting new current track to be: ", current_tracks[0][i + 1]);
               dispatch({
                   type: "SET_CURRENT_TRACK",
