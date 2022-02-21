@@ -8,10 +8,22 @@ function TinderCardContainer() {
   const [{ spotify, swipo_playlist, current_tracks}, dispatch] = useStateValue();
   const history = useHistory()
   let allCards;
+  let initializedCards;
 
+  //determine if the cards have already been initialized (check an attached class)
+  if (document.querySelector(".tinderCard")) {
+    initializedCards = document.querySelector(".tinderCard").classList.contains("initialized");
+  }
+  
   //useEffect that contains the swiping framework for all of the tinder cards. 
   //Runs only once, as you don't want to add extra event listeners than necessary.
   useEffect(() => {
+    //don't initialize cards until swipo_playlist is defined. avoids attaching stale
+    //closure to each card's panend handler.
+    //also, only initialize once the cards once, to avoid duplicate event handlers.
+    if (swipo_playlist && !initializedCards) {
+      // console.log("INITIALIZING CARDS!")
+
       //select all of the tinderCard wrapper divs on the DOM
       allCards = document.querySelectorAll(".tinderCard");
 
@@ -22,7 +34,7 @@ function TinderCardContainer() {
       //pan and also an event listener for panend. See respective .on methods for further docs.
       allCards.forEach(function (singleCard) {
         let hammertime = new Hammer(singleCard);
-        
+        singleCard.classList.add("initialized");
         //add the moving class on pan to remove transition sluggishness on pan
         hammertime.on('pan', function (event) {
           singleCard.classList.add('moving');
@@ -88,8 +100,8 @@ function TinderCardContainer() {
           }
         });
       });
-    // }
-  }, []);
+    };
+  }, [swipo_playlist, initializedCards]);
 
 
   //initializes any non swiped on cards, stacking them on top of each other.
@@ -108,7 +120,7 @@ function TinderCardContainer() {
 
   //Function ran whenever a TinderCard (containing a MainCard) is swiped. If the card was swiped right, the song will be saved to
   //a Swipo playlist. If that playlist does not already exist, then create that playlist and try again.
-  const swiped = function(direction, songURI) {
+  let swiped = function(direction, songURI) {
     return new Promise(resolve => {
       if (current_tracks !== null) {
         if (direction === "right" && swipo_playlist !== null) {
@@ -118,6 +130,8 @@ function TinderCardContainer() {
                   console.log("Added track data to Swipo Playlist: ", data)
               }
           });
+        } else {
+          console.log("Oh no! Couldn't add to the Swipo playlist. Maybe it's null: ", swipo_playlist);
         }
       }
       if (direction === "right" || direction === "left") {
@@ -154,7 +168,7 @@ function TinderCardContainer() {
       resolve(true)
     })
   }
-
+  
   return <div className="tinderCardContainer">
   {
         current_tracks[0].map((track, index) => 
