@@ -11,6 +11,8 @@ $input-font-size: 25px;
 #genrePickerContainer {
     // border: 3px solid red;
     display: flex; 
+    position: relative;
+
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -18,8 +20,10 @@ $input-font-size: 25px;
     height: fit-content;
     margin-top: 105px;
     overflow: auto;
+    z-index: 1;
     #genreHeader {
         font-size: 40px;
+        font-weight: 500;
         margin-top: 0;
         @media (max-width: 475px) {
             font-size: 25px;
@@ -76,13 +80,13 @@ $input-font-size: 25px;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0;
         // border: 1px solid red;
         label {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100px;
-            margin: 10px 20px;
             p {
                 margin-top: 20px;
             }

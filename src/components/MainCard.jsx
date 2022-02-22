@@ -36,15 +36,6 @@ function MainCard(props) {
     //listener that will toggle play/pause based on the current state of paused. 
     useEffect(() => {
         if (document.getElementById(`playPauseButton${props.id}`)) {
-            // document.getElementById(`playPauseButton${props.id}`).addEventListener("touchend", function() {
-            //     console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.id}`) )
-            //     if (player.current.audio.current.paused) {
-            //         player.current.audio.current.play()
-            //     } 
-            //     else {
-            //         player.current.audio.current.pause()
-            //     }
-            // })
             document.getElementById(`playPauseButton${props.id}`).addEventListener("click", function() {
                 console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.id}`) )
                 if (player.current.audio.current.paused) {
@@ -60,10 +51,6 @@ function MainCard(props) {
                 console.log("Clicked the open spotify button!");
                 window.open(props.track.openSpotifyUrl, '_blank');
             })
-            // document.getElementById(`openSpotifyButton${props.id}`).addEventListener("touchend", function() {
-            //     console.log("Yo! Clicked the open spotify button!");
-            //     window.open(props.track.openSpotifyUrl, '_blank');
-            // })
         }
     }, [player, props.songURI])
     return (

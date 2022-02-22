@@ -99,16 +99,6 @@ function Player() {
     if (current_tracks !== null && current_tracks !== undefined) {
         return (
             <TinderCardContainer/>
-            // <div className='cardContainer pushDownFromNavBar'>
-            //     {
-            //         current_tracks[0].map((track, index) => 
-            //             <TinderCard className='swipe' key={track.songURI + index} onSwipe={(dir) => swiped(dir, track.songURI)}
-            //                 onCardLeftScreen={() => outOfFrame(track.name)} preventSwipe = {['up', 'down']}>
-            //                 <MainCard track={track} isSwiped={track.isSwiped} songURI={track.songURI} id={track.songURI + index}/>
-            //             </TinderCard>
-            //         )
-            //     }
-            // </div>
         )
     } else {
         return (
