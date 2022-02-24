@@ -1,0 +1,24 @@
+.youPageContainer {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex-direction: column;
+    margin-top: 100px;
+    width: 100%;
+    height: 100%;
+    #constrictingDiv {
+        width: 50%;
+        height: 50%;
+        background-color: purple;
+
+        overflow: auto;
+        #overflowingDiv {
+            width: 1000px;
+            height: 1000px;
+            background-color: green;
+        }
+    }
+}

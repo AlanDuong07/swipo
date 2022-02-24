@@ -8,13 +8,13 @@ function BottomNav() {
     return (
         <div className="bottom-nav borderFaint">
             <Link to="/main/genrepicker/">
-                <img src={darkPlaylist} alt="Discover Playlists" id="playlist"></img>
+                <img src={darkPlaylist} alt="Discover Playlists" id="playlistIcon"></img>
             </Link>
             <Link to="/main/player/">
-                <img src={darkHome} alt="Swipo Player" id="home"></img>
+                <img src={darkHome} alt="Swipo Player" id="homeIcon"></img>
             </Link>
-            <Link to="/main/">
-                <img src={darkHeart} alt="Your Playlists" id="random"></img>
+            <Link to="/main/you/">
+                <img src={darkHeart} alt="You Page" id="youIcon"></img>
             </Link>
         </div>
     )

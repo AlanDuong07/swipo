@@ -9,7 +9,17 @@ import BigFloppa from '../images/bigFloppa.png'
 function MainCard(props) {
     const [{ current_track }] = useStateValue()
     const player = useRef()
+    //image variable set to url or a default floppa
     let image = props.track.albumImageUrl ? props.track.albumImageUrl : BigFloppa;
+
+    //for event listener attachment
+    let playPauseButton = document.getElementById(`playPauseButton${props.id}`);
+    let openSpotifyButton = document.getElementById(`openSpotifyButton${props.id}`);
+
+    //used for autoscroll function 
+    let songNameText = document.getElementById(`songNameText${props.id}`);
+    let artistText = document.getElementById(`artistText${props.id}`);
+
     // useEffect that checks whenever the current_track has changed, and whether the current_track is this individual MainCard.
     // if it is, then play the audio for this individual MainCard. If not, then don't play it.
     useEffect(() => {
@@ -35,8 +45,8 @@ function MainCard(props) {
     //useEffect that runs whenever the player is changed. It retrieves this specific playPauseButton and adds a touchend
     //listener that will toggle play/pause based on the current state of paused. 
     useEffect(() => {
-        if (document.getElementById(`playPauseButton${props.id}`)) {
-            document.getElementById(`playPauseButton${props.id}`).addEventListener("click", function() {
+        if (playPauseButton) {
+            playPauseButton.addEventListener("click", function() {
                 console.log("togglePlayPause! current button: ",document.getElementById(`playPauseButton${props.id}`) )
                 if (player.current.audio.current.paused) {
                     player.current.audio.current.play()
@@ -46,22 +56,53 @@ function MainCard(props) {
                 }
             })
         }
-        if (document.getElementById(`openSpotifyButton${props.id}`)) {
-            document.getElementById(`openSpotifyButton${props.id}`).addEventListener("click", function() {
+        if (openSpotifyButton) {
+            openSpotifyButton.addEventListener("click", function() {
                 console.log("Clicked the open spotify button!");
                 window.open(props.track.openSpotifyUrl, '_blank');
             })
         }
-    }, [player, props.songURI])
+    }, [player, props.songURI, playPauseButton, openSpotifyButton])
+
+    //if the songName or artist text overflows, autoscroll it
+    //back and forth indefinitely.
+    if (songNameText) {
+        initializeAutoScroll(songNameText, "songNameText");
+    }
+    if (artistText) {
+        initializeAutoScroll(artistText, "artistText");
+    }
+    function initializeAutoScroll(divElement, textType) {
+        divElement.scrollTop = 0;
+        let scrollRate = (textType === "songNameText") ? 300 : 400;
+        let ReachedMaxScroll = false;
+        function scrollDiv(div) {
+            // console.log("divElement scrollleft: ", divElement.scrollLeft + props.id);
+            if (!ReachedMaxScroll) {
+                //scroll forwards direction
+                div.scrollLeft += 1;
+                ReachedMaxScroll = div.scrollLeft >= (div.scrollWidth - div.offsetWidth);
+            }
+            else {
+                //scroll backwards direction
+                div.scrollLeft -= 1;
+                ReachedMaxScroll = (div.scrollLeft === 0) ? false : true;
+            }
+        }
+        setInterval(scrollDiv, scrollRate, divElement);
+    }
+
+
+
     return (
         <div className="tinderCard" id={props.id}>
             <div className="mainCard borderFaint">
                 <img src={image} alt="Album/Song cover" id="albumCover"></img>
-                <div id="songName">
-                    <h1>{props.track.name}</h1>
+                <div className="songName">
+                    <h1 id={`songNameText${props.id}`}>{props.track.name}</h1>
                 </div>
-                <div id="artist">
-                    <h2>{props.track.artists}</h2>
+                <div className="artist">
+                    <h2 id={`artistText${props.id}`}>{props.track.artists}</h2>
                 </div>
                 <div id="audio">
                     <AudioPlayer

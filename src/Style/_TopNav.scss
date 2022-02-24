@@ -35,6 +35,7 @@ $offWhite: #F0F0F0;
     }
     #sidebarButton {
         border: none;
+        background-color: transparent;
         cursor: pointer;
         img {
             // border: 1px solid green;
@@ -52,6 +53,7 @@ $offWhite: #F0F0F0;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(255,101,47,.2);
             transition: all .5s ease-in-out;
+            cursor: pointer;
         }
     }
     #sideBarWrapper {
@@ -62,7 +64,7 @@ $offWhite: #F0F0F0;
         right: -100%;
         width: 100vw;
         height: 100vh;
-        transition: all 0.45s ease-in-out;
+        transition: all 0.40s ease-in-out;
         #transparentClickSpace {
             position: relative;
             z-index: 2;
@@ -91,6 +93,7 @@ $offWhite: #F0F0F0;
             transition: all 0.45s ease-in-out;
             #sideBarLinks {
                 // border: 1px solid black;
+                height: 100%;
                 h1 {
                     color: $altBlack;
                     font-weight: 500;
@@ -112,10 +115,10 @@ $offWhite: #F0F0F0;
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    height: 450px;
+                    height: 40%;
                     border: 1px solid rgba(22,22,22,1);
                     border-radius: 20px;
-                    // padding: 20px;
+                    margin-bottom: 30px;
                 }
             }
         }

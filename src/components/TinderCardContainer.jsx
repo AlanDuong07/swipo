@@ -47,6 +47,7 @@ function TinderCardContainer() {
             return;
           }
           if (event.center.x === 0 && event.center.y === 0) {
+            singleCard.style.transform = '';
             return;
           }
           let xMulti = event.deltaX * 0.03;
@@ -59,7 +60,7 @@ function TinderCardContainer() {
         //when the user releases the mouse, make calculations for where the pan ended to 
         //determine whether it should leave the screen, and more importantly calculations 
         //for which direction, and into which playlist it may be saved.
-        hammertime.on('panend', async function (event) {
+        hammertime.on('panend', function (event) {
           console.log("Pan ended!")
           //remove the moving class to bring transitions back
           singleCard.classList.remove("moving");
@@ -85,16 +86,15 @@ function TinderCardContainer() {
             
             //most importantly, call the swiped function to process this swipe
             //action with the direction.
-            try {
-              let resolvedValue = await swiped(directionSwiped, singleCard.id);
-              console.log("Resolved value of await swiped: ", resolvedValue);
-            } catch (error) {
-              console.log('Swiped failed! Error: ', error);
-            }
+            swiped(directionSwiped, singleCard.id);
 
             //make the card leave the screen
             singleCard.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
             singleCard.classList.toggle('removed', !keep);
+            singleCard.addEventListener("transitionend", () => {
+              singleCard.style.display = "none";
+              console.log("just set singlecards display to none: ", singleCard.style.display);
+            })
             //reinitialize the remaining cards.
             initCards();
           }
@@ -121,52 +121,49 @@ function TinderCardContainer() {
   //Function ran whenever a TinderCard (containing a MainCard) is swiped. If the card was swiped right, the song will be saved to
   //a Swipo playlist. If that playlist does not already exist, then create that playlist and try again.
   let swiped = function(direction, songURI) {
-    return new Promise(resolve => {
-      if (current_tracks !== null) {
-        if (direction === "right" && swipo_playlist !== null) {
-          spotify.addTracksToPlaylist(swipo_playlist.id, [songURI], null, function (err, data) {
-              if (err) console.error(err);
-              else {
-                  console.log("Added track data to Swipo Playlist: ", data)
-              }
-          });
-        } else {
-          console.log("Oh no! Couldn't add to the Swipo playlist. Maybe it's null: ", swipo_playlist);
-        }
+    if (current_tracks !== null) {
+      if (direction === "right" && swipo_playlist !== null) {
+        spotify.addTracksToPlaylist(swipo_playlist.id, [songURI], null, function (err, data) {
+            if (err) console.error(err);
+            else {
+                console.log("Added track data to Swipo Playlist: ", data)
+            }
+        });
+      } else {
+        console.log("Oh no! Couldn't add to the Swipo playlist. Maybe it's null: ", swipo_playlist);
       }
-      if (direction === "right" || direction === "left") {
-        //Find the next track after the one just deleted. Make that the current track.
-        //That will allow that track's audio to be automatically played. 
-        //If the track that was just deleted was the last track, then current_track will be set to undefined.
-        for (let i = 0; i < current_tracks[0].length; i++) {
-          if (current_tracks[0][i].songURI === songURI) {
-            if (i === (current_tracks[0].length - 1)) {
-                console.log("Just swiped the last song! Setting current_track to null.")
-                dispatch({
-                    type: "SET_CURRENT_TRACK",
-                    current_track: null
-                })
-                dispatch({
-                    type: "SET_CURRENT_TRACKS",
-                    current_tracks: null
-                })
-                dispatch({
-                    type: "SET_CURRENT_PLAYLIST",
-                    current_playlist: null
-                })
-                history.push("/main/genrepicker");
-            } else {
-              console.log("setting new current track to be: ", current_tracks[0][i + 1]);
+    }
+    if (direction === "right" || direction === "left") {
+      //Find the next track after the one just deleted. Make that the current track.
+      //That will allow that track's audio to be automatically played. 
+      //If the track that was just deleted was the last track, then current_track will be set to undefined.
+      for (let i = 0; i < current_tracks[0].length; i++) {
+        if (current_tracks[0][i].songURI === songURI) {
+          if (i === (current_tracks[0].length - 1)) {
+              console.log("Just swiped the last song! Setting current_track to null.")
               dispatch({
                   type: "SET_CURRENT_TRACK",
-                  current_track: current_tracks[0][i + 1]
+                  current_track: null
               })
-            }
+              dispatch({
+                  type: "SET_CURRENT_TRACKS",
+                  current_tracks: null
+              })
+              dispatch({
+                  type: "SET_CURRENT_PLAYLIST",
+                  current_playlist: null
+              })
+              history.push("/main/genrepicker");
+          } else {
+            console.log("setting new current track to be: ", current_tracks[0][i + 1]);
+            dispatch({
+                type: "SET_CURRENT_TRACK",
+                current_track: current_tracks[0][i + 1]
+            })
           }
         }
       }
-      resolve(true)
-    })
+    }
   }
   
   return <div className="tinderCardContainer">
